@@ -1,6 +1,6 @@
 # Greensnet
 
-[![codecov](https://codecov.io/gh/philrogersuk/Greensnet/branch/master/graph/badge.svg?token=f8npZf69OO)](https://codecov.io/gh/philrogersuk/Greensnet)
+[![codecov](https://codecov.io/gh/philrogersuk/greensnet-deployment-test/branch/main/graph/badge.svg?token=V80H8TPW3L)](https://codecov.io/gh/philrogersuk/greensnet-deployment-test)
 
 Test repo for working on CI type stuff.
 
