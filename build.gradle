@@ -11,14 +11,22 @@ buildscript {
 
 plugins {
     id 'maven-publish'
+    id "org.sonarqube" version "3.0"
 }
 
 
 defaultTasks 'build'
 
-
 wrapper {
     description "Regenerates the Gradle Wrapper files"
     gradleVersion = '5.0'
     distributionUrl = "http://services.gradle.org/distributions/gradle-${gradleVersion}-all.zip"
+}
+
+sonarqube {
+    properties {
+        property "sonar.projectKey", "philrogersuk_greensnet-deployment-test"
+        property "sonar.organization", "philrogersuk"
+        property "sonar.host.url", "https://sonarcloud.io"
+    }
 }
