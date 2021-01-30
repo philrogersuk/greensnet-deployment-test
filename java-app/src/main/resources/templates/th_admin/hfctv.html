@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layouts/adminLayout :: layout(~{::link}, ~{::section})}">
+<head>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/admin/generic.css}" />
+</head>
+<body>
+<section>
+    <div class="row">
+        <div id="genericmodule" class="col-sm-8 topmodule">
+            <div id="module">
+                <h3 th:text="${fixture.id + ': HFCTV'}"></h3>
+
+                <table th:if="${not videos.isEmpty()}">
+                    <tr>
+                        <th></th>
+                        <th>timestamp</th>
+                        <th>season</th>
+                        <th>linkedFixture</th>
+                    </tr>
+                    <tr th:each="video : ${videos}">
+                        <td>
+                            <div class="videoWrapper">
+                                <iframe th:src="@{${'https://www.youtube.com/embed/' + video.youtubeId}}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                            </div>
+                        </td>
+                        <td th:text="${video.getTimeStamp()}"></td>
+                        <td th:text="${video.getSeason()}"></td>
+                        <td th:text="${video.getLinkedFixture()}"></td>
+                        <td th:text="${video.getTags()}"></td>
+                        <td></td>
+                    </tr>
+                </table>
+
+                <h3>Add New Video</h3>
+                <form th:action="@{${'/AdminHfctv/Fixture/' + fixture.id}}" method="post" enctype="multipart/form-data">
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                    <input type="hidden" name="fixture" th:value="${fixture.id}" />
+
+                    <div class="form-group">
+                        <label for="youtubeId">YoutubeId</label>
+                        <input type="text" class="form-control" name="youtubeId" id="youtubeId" placeholder="Youtube ID">
+                    </div>
+                    <div class="form-group">
+                        <label for="timestamp">Timestamp</label>
+                        <input type="text" class="form-control" name="timestamp" id="timestamp" placeholder="timeStamp">
+                    </div>
+                    <div class="form-group">
+                        <label for="tags">Tags</label>
+                        <input type="text" class="form-control" name="tags" id="tags" placeholder="tags">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add</button>
+                </form>
+            </div>
+        </div>
+        <div id="genericsidebar" class="col-sm-4 topmodule">
+            <div id="sidebar">
+                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <ins class="adsbygoogle" style="display: block" data-ad-client="ca-pub-0140213869397178" data-ad-slot="2289081698"
+                     data-ad-format="auto"></ins>
+                <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+            </div>
+        </div>
+    </div>
+
+</section>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layouts/adminLayout :: layout(~{::link}, ~{::section})}">
+<head>
+	<link rel="stylesheet" type="text/css" href="/css/admin/generic.css" />
+</head>
+<body>
+<section>
+	<div class="row">
+		<div id="genericmodule" class="col-sm-8 topmodule">
+			<div id="module">
+				<table th:if="${null ne page_list and not page_list.isEmpty()}">
+					<tr>
+						<th scope="col">Page</th>
+						<th scope="col">Last update</th>
+						<th scope="col"></th>
+					</tr>
+					<tr th:each="page : ${page_list}">
+						<td th:text="${page.id}"></td>
+						<td th:text="${page.lastUpdated}"></td>
+						<td>
+							<a th:href="@{AdminGenericPages(method='edit',id=${page.id})}">Edit</a> |
+							<a th:href="@{AdminGenericPages(method='delete',id=${page.id})}">Delete</a>
+						</td>
+					</tr>
+				</table>
+				<br />
+				<form action="AdminGenericPages?method=add" method="post" th:if="${null eq page_content or '' eq page_content}">
+					<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+					<label for="page">Page Id:</label>
+					<input type="text" name="page" id="page" /><br /><br />
+					<label for="title">Page Title:</label>
+					<input type="text" name="title" id="title" /><br /><br />
+					<label for="pageContent">Content:</label>
+					<textarea name="pageContent" id="pageContent" cols="50" rows="20"></textarea><br /><br />
+					<input type="submit" value="Add" />
+				</form>
+				<form action="AdminGenericPages?method=editSubmit" method="post" th:if="${null ne page_content  and '' ne page_content}">
+					<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+					<input type="hidden" name="oldId" id="oldId" th:value="${page_content.id}" /><br /><br />
+					<label for="page">Page Id:</label>
+					<input type="text" name="page" id="page" th:value="${page_content.id}" /><br /><br />
+					<label for="title">Page Title:</label>
+					<input type="text" name="title" id="title" th:value="${page_content.title}"/><br /><br />
+					<label for="pageContent">Content:</label>
+					<textarea name="pageContent" id="pageContent" cols="50" rows="20" th:text="${page_content.content}"></textarea><br /><br />
+					<input type="submit" value="Submit" />
+				</form>
+			</div>
+		</div>
+		<div id="genericsidebar" class="col-sm-4 topmodule">
+			<div id="sidebar">
+				<script type="application/javascript" async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"/>
+				<%-- Responsive --%>
+				<ins class="adsbygoogle" style="display: block" data-ad-client="ca-pub-0140213869397178" data-ad-slot="2289081698"
+					 data-ad-format="auto"></ins>
+				<script type="application/javascript">(adsbygoogle = window.adsbygoogle || []).push({});</script>
+			</div>
+		</div>
+	</div>
+</section>
+</body>
+</html>

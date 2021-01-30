@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<nav th:fragment="header" class="navbar fixed-top navbar-expand-lg navbar-dark d-print-none">
+    <a class="navbar-brand" th:href="@{/}"><img th:src="@{/images/crest160.png}" id="crest"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item d-none d-lg-block">
+                <a class="nav-link" th:href="@{/Home}">Home</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="newsDropdown">News</a>
+                <div class="dropdown-menu" aria-labelledby="newsDropdown">
+                    <a class="dropdown-item" th:href="@{/News}">Latest News</a>
+                    <a class="dropdown-item" th:href="@{/News/Archive}">News Archive</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown d-none d-md-block">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="firstTeamDropdown">First Team</a>
+                <div class="dropdown-menu" aria-labelledby="firstTeamDropdown">
+                    <a class="dropdown-item" th:href="@{/Fixtures}">Fixtures &amp; Results</a>
+                    <a class="dropdown-item" th:href="@{/Appearances}">Appearances</a>
+                    <a class="dropdown-item" th:href="@{/Tables}">Table</a>
+                    <a class="dropdown-item" th:href="@{/Squad}">Playing Squad</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" th:href="@{/Archives}">Archives</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown d-none d-md-block">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="youthDropdown">Youth</a>
+                <div class="dropdown-menu" aria-labelledby="youthDropdown">
+                    <a class="dropdown-item" th:href="@{/YouthNews?team=11}">Under 23s</a>
+                    <a class="dropdown-item" th:href="@{/YouthNews?team=3}">Under 18s</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" th:href="@{/YouthArchive}">Archives</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown d-block d-md-none">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="teamsDropdown">Teams</a>
+                <div class="dropdown-menu" aria-labelledby="teamsDropdown">
+                    <div class="nav-item">First Team</div>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" th:href="@{/Fixtures}">Fixtures &amp; Results</a>
+                    <a class="dropdown-item" th:href="@{/Appearances}">Appearances</a>
+                    <a class="dropdown-item" th:href="@{/Tables}">Table</a>
+                    <a class="dropdown-item" th:href="@{/Squad}">Playing Squad</a>
+                    <a class="dropdown-item" th:href="@{/Archives}">Archives</a>
+                    <div class="dropdown-divider"></div>
+                    <div class="nav-item">Youth</div>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" th:href="@{/YouthNews?team=11}">Under 23s</a>
+                    <a class="dropdown-item" th:href="@{/YouthNews?team=3}">Under 18s</a>
+                    <a class="dropdown-item" th:href="@{/YouthArchive}">Archive</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="clubInfoDropdown">Club Info</a>
+                <div class="dropdown-menu" aria-labelledby="clubInfoDropdown">
+                    <a class="dropdown-item" th:href="@{/ClubInfo}">General Info</a>
+                    <a class="dropdown-item" th:href="@{/Admission}">Admission</a>
+                    <a class="dropdown-item" th:href="@{/Directions}">Directions</a>
+                    <a class="dropdown-item" th:href="@{/History}">History</a>
+                    <a class="dropdown-item" th:href="@{/Honours}">Honours</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="communityDropdown">Community</a>
+                <div class="dropdown-menu" aria-labelledby="communityDropdown">
+                    <a class="dropdown-item" th:href="@{/Mascots}">Mascots</a>
+                    <a class="dropdown-item" th:href="@{/12thMan}">12th Man Fund</a>
+                    <a class="dropdown-item" th:href="@{/Welfare}">Welfare &amp; Safeguarding</a>
+                    <a class="dropdown-item" th:href="@{/Trust}">Supporters' Trust</a>
+                    <a class="dropdown-item" th:href="@{https://hfcsa.org/}">Supporters' Association</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="commercialDropdown">Commercial</a>
+                <div class="dropdown-menu" aria-labelledby="commercialDropdown">
+                    <a class="dropdown-item" th:href="@{/Sponsorship}">Advertising and Sponsorship</a>
+                    <a class="dropdown-item" th:href="@{/GaryMcCannStand}">The Gary McCann Stand Sponsors</a>
+                    <a class="dropdown-item" th:href="@{https://hfcsa.org/shop/}">Online Club Shop</a>
+                    <a class="dropdown-item" th:href="@{https://www.easyfundraising.org.uk/causes/hfcst/}">Easy Fundraising</a>
+                    <a class="dropdown-item" th:href="@{/Snowball}">Snowball Lottery</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="otherDropdown">Other</a>
+                <div class="dropdown-menu" aria-labelledby="otherDropdown">
+                    <a class="dropdown-item" th:href="@{/HFCTV}">HFCTV</a>
+                    <a class="dropdown-item" th:href="@{http://forum.hendonfc.net/}">Fan's Forum</a>
+                    <a class="dropdown-item" th:href="@{/Webmail}">Webmail</a>
+                    <a class="dropdown-item" th:href="@{/Contact}">Contact</a>
+                    <a class="dropdown-item d-block d-lg-none" th:href="@{https://www.twitter.com/HendonFC}">Twitter</a>
+                    <a class="dropdown-item d-block d-lg-none" th:href="@{https://www.facebook.com/HendonFC}">Facebook</a>
+                    <a class="dropdown-item d-block d-lg-none" th:href="@{https://instagram.com/hendonfc/}">Instagram</a>
+                    <a class="dropdown-item" th:href="@{/Links}">Links</a>
+                </div>
+            </li>
+        </ul>
+        <ul class="navbar-nav navbar-right d-none d-lg-block">
+            <li class="nav-link"><a th:href="@{https://www.twitter.com/HendonFC}"><img th:src="@{/images/Twitter_logo_white.png}" height="20" alt="Hendon FC Official Twitter"/></a></li>
+        </ul>
+        <ul class="navbar-nav navbar-right d-none d-lg-block">
+            <li class="nav-link"><a th:href="@{https://www.facebook.com/HendonFC}"><img th:src="@{/images/FB-f-Logo__white_29.png}" height="20" alt="Hendon FC Official Facebook" /></a></li>
+        </ul>
+        <ul class="navbar-nav navbar-right d-none d-lg-block">
+            <li class="nav-link"><a th:href="@{https://instagram.com/hendonfc/}"><img th:src="@{/images/instagram.png}" height="20" alt="Hendon FC Official Instagram Page"/></a></li>
+        </ul>
+    </div>
+</nav>
+</body>
+</html>

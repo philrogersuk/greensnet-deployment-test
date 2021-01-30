@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="menu" class="youthNav">
+    <span th:if="${season ne null && season ne ''}">[<a th:href="@{YouthNews(team=${team},season=${season})}">News</a>]</span>
+    <span th:if="${season eq null || season eq ''}">[<a th:href="@{YouthNews(team=${team})}">News</a>]</span>
+    <span th:if="${season ne null && season ne ''}">[<a th:href="@{YouthFixtures(team=${team},season=${season})}">Fixtures &amp; Results</a>]</span>
+    <span th:if="${season eq null || season eq ''}">[<a th:href="@{YouthFixtures(team=${team})}">Fixtures &amp; Results</a>]</span>
+    <span th:if="${season ne null && season ne ''}">[<a th:href="@{YouthTables(team=${team},season=${season})}">Table</a>]</span>
+    <span th:if="${season eq null || season eq ''}">[<a th:href="@{YouthTables(team=${team})}">Table</a>]</span>
+    [<a href="YouthArchive">Archives</a>]
+</div>
+</body>
+</html>

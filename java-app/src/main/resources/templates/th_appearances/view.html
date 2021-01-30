@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layouts/mainLayout :: layout(~{::link}, ~{::section})}">
+<head>
+    <link rel="stylesheet" type="text/css" th:href="@{'/css/appearances.css'}" />
+</head>
+<body>
+<section>
+    <div class="row">
+        <div class="col-md-8">
+            <table class="table">
+                <tr>
+                    <th scope="col" rowspan="2">Player</th>
+                    <th scope="col" colspan="3" class="d-none d-lg-table-cell left-border">League</th>
+                    <th scope="col" colspan="3" class="d-none d-lg-table-cell left-border">Cup</th>
+                    <th scope="col" colspan="4" class="left-border text-center">Total</th>
+                </tr>
+                <tr>
+                    <th scope="col" class="d-none d-lg-table-cell left-border">P</th>
+                    <th scope="col" class="d-none d-lg-table-cell">S</th>
+                    <th scope="col" class="d-none d-lg-table-cell">G</th>
+                    <th scope="col" class="d-none d-lg-table-cell left-border">P</th>
+                    <th scope="col" class="d-none d-lg-table-cell">S</th>
+                    <th scope="col" class="d-none d-lg-table-cell">G</th>
+                    <th scope="col" class="left-border">P</th>
+                    <th scope="col">S</th>
+                    <th scope="col">T</th>
+                    <th scope="col">G</th>
+                </tr>
+                <tr th:each="appearance:${appearances}">
+                    <th:block th:if="${appearance.player ne null}">
+                        <td th:text="${appearance.playerName + (appearance.onLoan ? ' (L)' : '')}" class="playerName"></td>
+                        <td class="d-none d-lg-table-cell left-border" th:text="${appearance.leagueStarts}"></td>
+                        <td class="d-none d-lg-table-cell" th:text="${appearance.leagueSub}"></td>
+                        <td class="d-none d-lg-table-cell" th:text="${appearance.leagueGoals}"></td>
+                        <td class="d-none d-lg-table-cell left-border" th:text="${appearance.cupStarts}"></td>
+                        <td class="d-none d-lg-table-cell" th:text="${appearance.cupSub}"></td>
+                        <td class="d-none d-lg-table-cell" th:text="${appearance.cupGoals}"></td>
+                        <td class="left-border" th:text="${appearance.totalStarts}"></td>
+                        <td th:text="${appearance.totalSub}"></td>
+                        <td th:text="${appearance.totalApps}"></td>
+                        <td th:text="${appearance.totalGoals}"></td>
+                    </th:block>
+                    <th:block th:if="${appearance.player eq null}">
+                        <td class="playerName">Own Goals</td>
+                        <td class="d-none d-lg-table-cell left-border"></td>
+                        <td class="d-none d-lg-table-cell"></td>
+                        <td class="d-none d-lg-table-cell" th:text="${appearance.leagueGoals}"></td>
+                        <td class="d-none d-lg-table-cell left-border"></td>
+                        <td class="d-none d-lg-table-cell"></td>
+                        <td class="d-none d-lg-table-cell" th:text="${appearance.cupGoals}"></td>
+                        <td class="left-border"></td>
+                        <td></td>
+                        <td></td>
+                        <td th:text="${appearance.totalGoals}"></td>
+                    </th:block>
+                </tr>
+            </table>
+        </div>
+        <div class="col-md-4">
+            <h3 th:text="${'More From ' + currentSeason + '/' + (currentSeason + 1)}">More From 2018/2019</h3>
+            <a th:href="@{${'/Fixtures/' + currentSeason}}"><div class="moreLink">Fixtures &amp; Results</div></a>
+            <a th:href="@{${'/Tables/' + currentSeason}}"><div class="moreLink">League Table</div></a>
+
+            <h3>More Appearances</h3>
+
+            <div id="nextSeason" th:if="${null ne nextSeason}">
+                <a th:href="@{${'/Appearances/' + nextSeason}}"><div class="moreLink" th:text="${#numbers.formatInteger(nextSeason, 2) + '/' + #numbers.formatInteger((nextSeason+1)%100, 2)}">2018/19</div></a>
+            </div>
+            <div class="moreLink current" th:text="${#numbers.formatInteger(currentSeason, 2) + '/' + #numbers.formatInteger((currentSeason+1)%100, 2)}">2018/19</div>
+            <div id="previousSeason" th:if="${null ne previousSeason}">
+                <a th:href="@{${'/Appearances/' + previousSeason}}"><div class="moreLink" th:text="${#numbers.formatInteger(previousSeason, 2) + '/' + #numbers.formatInteger((previousSeason+1)%100, 2)}">2018/19</div></a>
+            </div>
+            <br />
+            <a th:href="@{'/Appearances/Archive'}"><div class="moreLink">Appearance Archives</div></a>
+
+
+            <script type="application/javascript" async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" />
+            <ins class="adsbygoogle" style="display: block" data-ad-client="ca-pub-0140213869397178" data-ad-slot="2289081698"
+                 data-ad-format="auto"></ins>
+            <script type="application/javascript">(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+        </div>
+    </div>
+</section>
+</body>
+</html>

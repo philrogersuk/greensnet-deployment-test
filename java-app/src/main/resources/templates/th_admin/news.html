@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layouts/adminLayout :: layout(~{::link}, ~{::section})}">
+<head>
+	<link rel="stylesheet" type="text/css" href="/css/admin/generic.css" />
+</head>
+<body>
+<section>
+	<div class="row">
+		<div id="genericmodule" class="col-sm-8 topmodule">
+			<div id="module">
+				<th:block th:if="${null != first_month}">
+					<span th:replace="fragments/admin/news/showMonths :: showMonths"></span>
+				</th:block>
+				<br />
+				<th:block th:if="${null != news_items}">
+					<form th:replace="fragments/admin/news/list :: list" ></form>
+				</th:block>
+				<th:block th:if="${null != news_item}">
+					<form th:replace="fragments/admin/news/edit :: edit" ></form>
+				</th:block>
+				<th:block th:if="${null == news_item}">
+					<form th:replace="fragments/admin/news/new :: new" ></form>
+				</th:block>
+			</div>
+		</div>
+		<div id="genericsidebar" class="col-sm-4 topmodule">
+			<div id="sidebar">
+				<script type="application/javascript" async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"/>
+				<%-- Responsive --%>
+				<ins class="adsbygoogle" style="display: block" data-ad-client="ca-pub-0140213869397178" data-ad-slot="2289081698"
+					 data-ad-format="auto"></ins>
+				<script type="application/javascript">(adsbygoogle = window.adsbygoogle || []).push({});</script>
+			</div>
+		</div>
+	</div>
+</section>
+</body>
+</html>

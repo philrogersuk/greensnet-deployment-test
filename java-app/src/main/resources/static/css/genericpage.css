@@ -1,0 +1,17 @@
+h3 {
+    border-top-style: none;
+}
+
+a>.moreLink {
+    margin-top: 10px;
+    text-underline-mode: none;
+    font-weight: bold;
+    border-color: #006937;
+    border-width: 1px;
+    border-style: solid;
+    text-align: center;
+    padding: 5px 0px;
+}
+a>.moreLink:hover {
+    background-color: #eeeeee;
+}

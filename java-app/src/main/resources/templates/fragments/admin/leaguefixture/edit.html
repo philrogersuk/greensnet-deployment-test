@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="edit">
+    <form action="AdminLeagueFixtures?method=editSubmit" method="post">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
+        <input type="hidden" name="season" id="season" th:value="${selected_season}" />
+        <input type="hidden" name="competition" id="competition" th:value="${selected_competition}" />
+        <input type="hidden" name="id" id="id" th:value="${league_fixture.id}" />
+
+        <label for="date">Date:</label>
+        <input type="text" name="date" id="date" th:value="${#temporals.format(league_fixture.fixtureDate, 'yyyy-MM-dd')}" /><br /><br />
+        <label for="homeClub">Home Club:</label>
+        <select name="homeClub" id="homeClub">
+            <option th:each="item : ${club_list}" th:value="${item.id}" th:selected="${item.id eq league_fixture.homeClub.id}" th:text="${item.name}"></option>
+        </select><br /><br />
+        <label for="homeScore">Home Goals</label>
+        <input type="text" name="homeScore" id="homeScore" size="3" th:value="${league_fixture.homeGoals}" /><br /><br />
+        <label for="awayScore">Away Score:</label>
+        <input type="text" name="awayScore" id="awayScore" size="3" th:value="${league_fixture.awayGoals}" /><br /><br />
+        <label for="awayClub">Away Club:</label>
+        <select name="awayClub" id="awayClub">
+            <option th:each="item : ${club_list}" th:value="${item.id}" th:selected="${item.id eq league_fixture.awayClub.id}" th:text="${item.name}"></option>
+        </select><br /><br />
+        <label for="attendance">Attendance:</label>
+        <input type="text" name="attendance" id="attendance" th:value="${league_fixture.attendance}" /><br /><br />
+        <input type="submit" value="Edit" />
+    </form>
+    <form method="post" th:action="@{AdminLeagueFixtures(method=remove,id=${league_fixture.id})}"/>
+    <input type="hidden" name="season" id="season" th:value="${selected_season}" />
+    <input type="hidden" name="competition" id="competition" th:value="${selected_competition}" />
+    <input type="submit" value="Delete" />
+    </form>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<form th:fragment="lineup" th:action="@{AdminFixtures(method=squadsSubmit,season=${param.season})}" method="post">
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+    <input type="hidden" name="fixtureId" id="fixtureId" th:value="${param.id}" />
+    <input type="hidden" name="season" id="season" th:value="${param.season}" />
+    <fieldset>
+        <legend>Edit Fixture Squad</legend>
+        Hendon Team:<br />
+        <br />
+        <table>
+            <tr>
+                <th scope="col"></th>
+                <th scope="col">Shirt</th>
+                <th scope="col">Player</th>
+                <th scope="col">Start</th>
+                <th scope="col">Yellow Min</th>
+                <th scope="col">Red Min</th>
+                <th scope="col">Sub Min</th>
+                <th scope="col">Shirt Replaced</th>
+            </tr>
+            <tr th:each="player : ${hendon_team}">
+                <td th:text="${playerStat.count}">1</td>
+                <td><select th:name="'shirt' + ${playerStat.count}" th:id="'shirt' + ${playerStat.count}">
+                    <th:block th:each="num : ${#numbers.sequence(1,99)}">
+                        <option th:value="${num}" th:selected="${num==player.shirtNumber}" th:text="${num}">1</option>
+                    </th:block>
+                    </select></td>
+                <td><select th:name="'player' + ${playerStat.count}" th:id="'player' + ${playerStat.count}">
+                    <option value=""></option>
+                    <th:block th:each="item : ${staff_list}">
+                        <option th:value="${item.id}" th:selected="${item.id==player.player.id}" th:text="${item.firstName} + ' ' + ${item.lastName}">Gary McCann</option>
+                    </th:block>
+                    </select></td>
+                <td><input type="checkbox" th:name="'start' + ${playerStat.count}" th:id="'start' + ${playerStat.count}" th:checked="${!player.substitute}" /></td>
+                <td><input type="text" size="3" th:name="'yellow' + ${playerStat.count}" th:id="'yellow' + ${playerStat.count}" th:value="${player.yellowCardMinute}" /></td>
+                <td><input type="text" size="3" th:name="'red' + ${playerStat.count}" th:id="'red' + ${playerStat.count}" th:value="${player.redCardMinute}" /></td>
+                <td><input type="text" size="3" th:name="'subMin' + ${playerStat.count}" th:id="'subMin' + ${playerStat.count}" th:value="${player.substitutionMinute}" /></td>
+                <td><select th:name="'replaced' + ${playerStat.count}" th:id="'replaced' + ${playerStat.count}">
+                    <option value=""></option>
+                    <th:block th:each="num : ${#numbers.sequence(1,99)}">
+                        <option th:value="${num}" th:selected="${num==player.playerReplaced}" th:text="${num}">1</option>
+                    </th:block>
+                    </select>
+                </td>
+            </tr>
+
+            <tr th:each="playerNum : ${#numbers.sequence(hendon_team.size() + 1, 25)}">
+                <td th:text="${playerNum}">1</td>
+                <td><select th:name="'shirt' + ${playerNum}" th:id="'shirt' + ${playerNum}">
+                    <th:block th:each="num : ${#numbers.sequence(1,99)}">
+                        <option th:value="${num}" th:text="${num}">1</option>
+                    </th:block>
+                </select></td>
+                <td><select th:name="'player' + ${playerNum}" th:id="'player' + ${playerNum}">
+                    <option value=""></option>
+                    <th:block th:each="item : ${staff_list}">
+                        <option th:value="${item.id}" th:text="${item.firstName} + ' ' + ${item.lastName}">Gary McCann</option>
+                    </th:block>
+                </select></td>
+                <td><input type="checkbox" th:name="'start' + ${playerNum}" th:id="'start' + ${playerNum}" th:checked="${playerNum < 12}"/></td>
+                <td><input type="text" size="3" th:name="'yellow' + ${playerNum}" th:id="'yellow' + ${playerNum}" /></td>
+                <td><input type="text" size="3" th:name="'red' + ${playerNum}" th:id="'red' + ${playerNum}" /></td>
+                <td><input type="text" size="3" th:name="'subMin' + ${playerNum}" th:id="'subMin' + ${playerNum}" /></td>
+                <td><select th:name="'replaced' + ${playerNum}" th:id="'replaced' + ${playerNum}">
+                    <option value=""></option>
+                    <th:block th:each="num : ${#numbers.sequence(1,99)}">
+                        <option th:value="${num}" th:text="${num}">1</option>
+                    </th:block>
+                </select>
+                </td>
+            </tr>
+        </table>
+        <br />
+        <br /> Away Team:<br />
+        <br />
+        <table>
+            <tr>
+                <th scope="col"></th>
+                <th scope="col">Shirt</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Start</th>
+                <th scope="col">Yellow Min</th>
+                <th scope="col">Red Min</th>
+                <th scope="col">Sub Min</th>
+                <th scope="col">Shirt Replaced</th>
+            </tr>
+            <tr th:each="player : ${opposition_team}">
+                <td th:text="${(playerStat.count)}">1</td>
+                <td><select th:name="'oshirt' + ${playerStat.count}" th:id="'shirt' + ${playerStat.count}">
+                    <th:block th:each="num : ${#numbers.sequence(1,99)}">
+                        <option th:value="${num}" th:selected="${num==player.shirtNumber}" th:text="${num}">1</option>
+                    </th:block>
+                </select></td>
+                <td><input type="text" th:name="'ofirstName' + ${playerStat.count}" th:id="'ofirstName' + ${playerStat.count}" th:value="${player.firstName}"/></td>
+                <td><input type="text" th:name="'olastName' + ${playerStat.count}" th:id="'olastName' + ${playerStat.count}" th:value="${player.lastName}"/></td>
+                <td><input type="checkbox" th:name="'ostart' + ${playerStat.count}" th:id="'ostart' + ${playerStat.count}" th:checked="${!player.substitute}" /></td>
+                <td><input type="text" size="3" th:name="'oyellow' + ${playerStat.count}" th:id="'oyellow' + ${playerStat.count}" th:value="${player.yellowCardMinute}" /></td>
+                <td><input type="text" size="3" th:name="'ored' + ${playerStat.count}" th:id="'ored' + ${playerStat.count}" th:value="${player.redCardMinute}" /></td>
+                <td><input type="text" size="3" th:name="'osubMin' + ${playerStat.count}" th:id="'osubMin' + ${playerStat.count}" th:value="${player.substitutionMinute}" /></td>
+                <td><select th:name="'oreplaced' + ${playerStat.count}" th:id="'oreplaced' + ${playerStat.count}">
+                    <option value=""></option>
+                    <th:block th:each="num : ${#numbers.sequence(1,99)}">
+                        <option th:value="${num}" th:selected="${num==player.playerReplaced}" th:text="${num}">1</option>
+                    </th:block>
+                </select>
+                </td>
+            </tr>
+
+            <tr th:each="playerNum : ${#numbers.sequence(opposition_team.size() + 1, 25)}">
+                <td th:text="${playerNum}">1</td>
+                <td><select th:name="'oshirt' + ${playerNum}" th:id="'oshirt' + ${playerNum}">
+                    <th:block th:each="num : ${#numbers.sequence(1,99)}">
+                        <option th:value="${num}" th:text="${num}">1</option>
+                    </th:block>
+                </select></td>
+                <td><input type="text" th:name="'ofirstName' + ${playerNum}" th:id="'ofirstName' + ${playerNum}" /></td>
+                <td><input type="text" th:name="'olastName' + ${playerNum}" th:id="'olastName' + ${playerNum}" /></td>
+                <td><input type="checkbox" th:name="'ostart' + ${playerNum}" th:id="'ostart' + ${playerNum}" th:checked="${playerNum < 12}"/></td>
+                <td><input type="text" size="3" th:name="'oyellow' + ${playerNum}" th:id="'oyellow' + ${playerNum}" /></td>
+                <td><input type="text" size="3" th:name="'ored' + ${playerNum}" th:id="'ored' + ${playerNum}" /></td>
+                <td><input type="text" size="3" th:name="'osubMin' + ${playerNum}" th:id="'osubMin' + ${playerNum}" /></td>
+                <td><select th:name="'oreplaced' + ${playerNum}" th:id="'oreplaced' + ${playerNum}">
+                    <option value=""></option>
+                    <th:block th:each="num : ${#numbers.sequence(1,99)}">
+                        <option th:value="${num}" th:text="${num}">1</option>
+                    </th:block>
+                </select>
+                </td>
+            </tr>
+        </table>
+        <input type="submit" value="Add" />
+    </fieldset>
+</form>
+</body>
+</html>

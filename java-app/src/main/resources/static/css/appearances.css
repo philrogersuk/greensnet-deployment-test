@@ -1,0 +1,57 @@
+div > h3 {
+    border-top: none;
+    padding-top: 30px;
+}
+
+
+div > h3:first-of-type {
+    padding-top: 0px;
+}
+
+.table td {
+    vertical-align: middle;
+    text-align: center;
+}
+
+td.playerName {
+    text-align: left;
+}
+
+a>.moreLink {
+    margin-top: 10px;
+    text-underline-mode: none;
+    font-weight: bold;
+    border-color: #006937;
+    border-width: 1px;
+    border-style: solid;
+    text-align: center;
+    padding: 5px 0px;
+}
+a>.moreLink:hover {
+    background-color: #eeeeee;
+}
+.moreLink.current {
+    margin-top: 10px;
+    text-underline-mode: none;
+    font-weight: bold;
+    border-color: #006937;
+    border-width: 1px;
+    border-style: solid;
+    text-align: center;
+    padding: 5px 0px;
+    background-color: #006937;
+    color: #ffffff;
+}
+
+th {
+    background:#f2f2f2;
+    font-size:120%;
+    font-weight:bold;
+    text-align: center;
+}
+
+.left-border {
+    border-color: #006937;
+    border-left-width: 1px;
+    border-left-style: solid;
+}

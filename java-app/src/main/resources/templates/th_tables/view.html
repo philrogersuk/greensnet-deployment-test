@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layouts/mainLayout :: layout(~{::link}, ~{::section})}">
+<head>
+    <link rel="stylesheet" type="text/css" th:href="@{'/css/tables.css'}" />
+</head>
+<body>
+<section>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="table" th:each="table : ${leagueTables}">
+                <h3 th:text="${table.competitionName}">Isthmian League 2001/2002</h3>
+                <p th:text="'Up to date as at ' + ${null ne table.lastFixture ? #temporals.format(table.lastFixture, 'dd/MM/yyyy') : 'start of season'}"></p>
+
+                <table class="table">
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col">P</th>
+                        <th scope="col" class="d-none d-lg-table-cell">W</th>
+                        <th scope="col" class="d-none d-lg-table-cell">D</th>
+                        <th scope="col" class="d-none d-lg-table-cell">L</th>
+                        <th scope="col" class="d-none d-lg-table-cell">F</th>
+                        <th scope="col" class="d-none d-lg-table-cell">A</th>
+                        <th scope="col" class="points">Pts</th>
+                        <th scope="col">GD</th>
+                        <th th:if="${table.hasPointsDeduction()}" scope="col">&nbsp;</th>
+                    </tr>
+                    <tr th:each="row : ${table.rows}" th:class="${row.isHendon() ? 'hendon' : ''}">
+                        <td th:text="${rowStat.count}"></td>
+                        <td><img th:src="${row.crestUrl}" height="40px" /></td>
+                        <td class="clubName" th:text="${row.clubName}"></td>
+                        <td th:text="${row.played}"></td>
+                        <td class="d-none d-lg-table-cell" th:text="${row.won}"></td>
+                        <td class="d-none d-lg-table-cell" th:text="${row.drawn}"></td>
+                        <td class="d-none d-lg-table-cell" th:text="${row.lost}"></td>
+                        <td class="d-none d-lg-table-cell" th:text="${row.scored}"></td>
+                        <td class="d-none d-lg-table-cell" th:text="${row.conceeded}"></td>
+                        <td th:text="${row.points}" class="points"></td>
+                        <td th:text="${row.scored - row.conceeded}"></td>
+                        <td th:if="${table.hasPointsDeduction() && row.deducted == 0}">&nbsp;</td>
+                        <td th:if="${table.hasPointsDeduction() && row.deducted != 0}"><span class="deduction" th:text="'-' + ${row.deducted}"></span> </td>
+                    </tr>
+                </table>
+
+                <th:block th:if="${not table.notes.isEmpty()}">
+                    <h4>Notes</h4>
+                    <div class="note" th:each="note : ${table.notes}"
+                         th:text="${note.clubName} + ' deducted ' + ${note.pointsDeducted} +
+				(${note.pointsDeducted == 1} ? ' point ' : ' points ') + 'for ' + ${note.deductionReason} + '.'">
+                    </div>
+                </th:block>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <h3 th:text="${'More From ' + currentSeason + '/' + (currentSeason + 1)}">More From 2018/2019</h3>
+            <a th:href="@{${'/Fixtures/' + currentSeason}}"><div class="moreLink">Fixtures &amp; Results</div></a>
+            <a th:href="@{${'/Appearances/' + currentSeason}}"><div class="moreLink">Player Appearances</div></a>
+
+            <h3>More Tables</h3>
+
+            <div id="nextSeason" th:if="${null ne nextSeason}">
+                <a th:href="@{${'/Tables/' + nextSeason}}"><div class="moreLink" th:text="${#numbers.formatInteger(nextSeason, 2) + '/' + #numbers.formatInteger((nextSeason+1)%100, 2)}">2018/19</div></a>
+            </div>
+            <div class="moreLink current" th:text="${#numbers.formatInteger(currentSeason, 2) + '/' + #numbers.formatInteger((currentSeason+1)%100, 2)}">2018/19</div>
+            <div id="previousSeason" th:if="${null ne previousSeason}">
+                <a th:href="@{${'/Tables/' + previousSeason}}"><div class="moreLink" th:text="${#numbers.formatInteger(previousSeason, 2) + '/' + #numbers.formatInteger((previousSeason+1)%100, 2)}">2018/19</div></a>
+            </div>
+            <br />
+            <a th:href="@{'/Tables/Archive'}"><div class="moreLink">Table Archives</div></a>
+
+
+            <script type="application/javascript" async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" />
+            <ins class="adsbygoogle" style="display: block" data-ad-client="ca-pub-0140213869397178" data-ad-slot="2289081698"
+                 data-ad-format="auto"></ins>
+            <script type="application/javascript">(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+        </div>
+    </div>
+</section>
+</body>
+</html>

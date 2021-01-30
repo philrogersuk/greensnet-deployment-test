@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layouts/mainLayout :: layout(~{::link}, ~{::section})}">
+<head>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/reports.css}" />
+</head>
+<body>
+<section>
+	<div th:if="${null ne fixture}" class="row">
+		<div id="mainReport" class="col-md-8 topmodule">
+			<div class="score">
+				<div class="row homeTeam align-items-center">
+					<div class="col-2 text-center"><img th:src="@{${homeCrest}}" height="40px"></div>
+					<div class="col-8 teamName" th:text="${fixture.homeTeamName}"></div>
+					<div class="col-2 goals" th:text="${fixture.homeTeamScore}">A</div>
+				</div>
+				<div class="row awayTeam align-items-center">
+					<div class="col-2 text-center"><img  th:src="@{${awayCrest}}" height="40px"></div>
+					<div class="col-8 teamName" th:text="${fixture.awayTeamName}"></div>
+					<div class="col-2 goals" th:text="${fixture.awayTeamScore}">A</div>
+				</div>
+				<div class="row" th:if="${-1 ne fixture.abandonedMinute}">
+					<div class="col-1"></div>
+					<div class="col-8" th:text="${'Abandoned at ' + fixture.homeTeamScore + '-' + fixture.awayTeamScore + ' after ' + fixture.abandonedMinute + ' minutes due to ' + fixture.abandonedReason + '.'}"></div>
+					<div class="col-2"></div>
+				</div>
+			</div>
+			<div class="details">
+				<div class="row">
+					<div class="col-4 heading">Date:</div>
+					<div class="col-8" th:text="${#temporals.format(fixture.kickOff, 'EEEE dd MMMM yyyy')}"></div>
+				</div>
+				<div class="row">
+					<div class="col-4 heading">Competition:</div>
+					<div class="col-8" th:text="${fixture.competition.name}"></div>
+				</div>
+				<div class="row">
+					<div class="col-4 heading">Attendance:</div>
+					<div class="col-8" th:text="${-1 eq fixture.attendance ? 'Unknown' : fixture.attendance}"></div>
+				</div>
+				<div class="row">
+					<div class="col-4 heading">Venue:</div>
+					<div class="col-8" th:text="${fixture.venueName}"></div>
+				</div>
+			</div>
+
+			<div id="report">
+				<h3>Match Report</h3>
+
+				<div th:if="${null ne fixture.report and '' ne fixture.report}" th:utext="${fixture.reportAsHtml}">
+				</div>
+				<div th:if="${null eq fixture.report or '' eq fixture.report}">
+					<p>No report is currently available for this fixture.</p>
+				</div>
+				<div class="author">
+					<p th:if="${null ne fixture.author && '' ne fixture.author}" th:text="${'Report by ' + fixture.author}"></p>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="col-md-4 moreDetails">
+
+			<div id="videos" th:if="${null ne videos and not videos.isEmpty()}">
+				<h3>HFCTV</h3>
+
+				<div class="videoWrapper" th:each="video : ${videos}">
+					<iframe th:src="@{${'https://www.youtube.com/embed/' + video.youtubeId}}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+				</div>
+			</div>
+
+<!--			<div id="moreInfo">
+				<h3>Further info</h3>
+
+				<a href="#"><div class="moreDetailsLink">Match Images</div></a>
+			</div>-->
+
+			<div id="moreMatches">
+				<h3>More Matches</h3>
+
+				<a th:href="@{${'/Reports/' + nextFixture.id}}" th:if="${null ne nextFixture}">
+					<div class="moreDetailsLink">
+						<div>Next Match</div>
+						<div class="otherMatchLink" th:text="${nextFixture.homeTeamName + ' ' + nextFixture.homeTeamScore + '-' + nextFixture.awayTeamScore + ' ' + nextFixture.awayTeamName}"></div>
+					</div>
+				</a>
+				<a th:href="@{${'/Reports/' + previousFixture.id}}" th:if="${null ne previousFixture}">
+					<div class="moreDetailsLink">
+						<div>Previous Match</div>
+						<div class="otherMatchLink" th:text="${previousFixture.homeTeamName + ' ' + previousFixture.homeTeamScore + '-' + previousFixture.awayTeamScore + ' ' + previousFixture.awayTeamName}"></div>
+					</div>
+				</a>
+				<a th:href="@{${'/Fixtures/' + fixture.season}}"><div class="moreDetailsLink" th:text="${'More from ' + fixture.season + '/' + (fixture.season + 1)}">More from 2000/2001</div></a>
+			</div>
+
+			<div id="sponsors" th:if="${fixture.hasSponsors}">
+				<h3>Sponsors</h3>
+
+				<div class="row" th:if="${null ne fixture.matchSponsor and '' ne fixture.matchSponsor}">
+					<div class="col-4 heading">Match:</div>
+					<div class="col-8" th:text="${fixture.matchSponsor}"></div>
+				</div>
+				<div class="row" th:if="${null ne fixture.matchballSponsor and '' ne fixture.matchballSponsor}">
+					<div class="col-4 heading">Matchballs:</div>
+					<div class="col-8" th:text="${fixture.matchballSponsor}"></div>
+				</div>
+				<div class="row" th:if="${null ne fixture.programmeSponsor and '' ne fixture.programmeSponsor}">
+					<div class="col-4 heading">Programme:</div>
+					<div class="col-8" th:text="${fixture.programmeSponsor}"></div>
+				</div>
+				<div class="row" th:if="${null ne fixture.mascot and '' ne fixture.mascot}">
+					<div class="col-4 heading">Mascots:</div>
+					<div class="col-8" th:text="${fixture.mascot}"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div th:if="${null ne fixture}" class="row">
+		<div class="col-md-3">
+
+			<div id="hometeam">
+				<h3 th:text="${hendon_name}"></h3>
+				<div th:class="${player.substitute ? 'row appearance substitute' : 'row appearance'}" th:each="player : ${hendon_team}">
+					<div class="col-2 text-right" th:text="${player.shirtNumber}"></div>
+					<div class="col-10" th:text="${player.displayName}"></div>
+				</div>
+				<p th:if="${#lists.size(hendon_team) lt 1}">Squad unknown</p>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<h3>Match Events</h3>
+			<div class="row event align-items-center" th:each="event : ${fixture_events}">
+				<div class="col-2 text-center"
+					 th:if="${event.isHendonEvent()}"><img th:src="@{${'/images/matchevents/' + event.type + '.png'}}" class="img-fluid"/></div>
+				<div class="col-1 text-center" th:text="${(-1 != event.minute) ? event.minute + '''''' : ''}"
+							th:if="${event.isHendonEvent()}">'</div>
+				<div class="col-6 text-center" th:text="${event.displayInfo}"
+					 th:if="${event.isHendonEvent()}"></div>
+
+				<div class="col-3"></div>
+
+				<div class="col-6 text-center" th:text="${event.displayInfo}"
+					 th:if="${not event.isHendonEvent()}"></div>
+				<div class="col-1 text-center" th:text="${(-1 != event.minute) ? event.minute + '''''' : ''}"
+					 th:if="${not event.isHendonEvent()}">'</div>
+				<div class="col-2 text-center"
+					 th:if="${not event.isHendonEvent()}"><img th:src="@{${'/images/matchevents/' + event.type + '.png'}}"  class="img-fluid"/></div>
+
+			</div>
+		</div>
+		<div class="col-md-3">
+			<div id="awayTeam">
+				<h3 th:text="${fixture.oppositionName}"></h3>
+				<div th:class="${player.substitute ? 'row appearance substitute' : 'row appearance'}" th:each="player : ${opposition_team}">
+					<div class="col-2 text-right" th:text="${player.shirtNumber}"></div>
+					<div class="col-10" th:text="${player.displayName}"></div>
+				</div>
+				<p th:if="${#lists.size(opposition_team) lt 1}">Squad unknown</p>
+			</div>
+		</div>
+	</div>
+
+</section>
+</body>
+</html>

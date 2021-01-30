@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<nav th:fragment="header" class="navbar sticky-top navbar-expand-lg navbar-dark d-print-none">
+    <a class="navbar-brand" th:href="@{/Admin}">Hendon FC - Admin</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="homeDropdown">Homepage</a>
+                <div class="dropdown-menu" aria-labelledby="homeDropdown">
+                    <a class="dropdown-item" th:href="@{/AdminFeaturedItems}">Featured Items Carousel</a>
+                    <a class="dropdown-item" th:href="@{/AdminSponsors}">Club Sponsors</a>
+                </div>
+            </li>
+            <li class="nav-item d-none d-lg-block">
+                <a class="nav-link" th:href="@{/AdminNews}">News</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="clubDropdown">Clubs</a>
+                <div class="dropdown-menu" aria-labelledby="clubDropdown">
+                    <a class="dropdown-item" th:href="@{/AdminClubs}">Senior Clubs</a>
+                    <a class="dropdown-item" th:href="@{/AdminOldClubNames}">Old Club Names</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="competitionDropdown">Competitions</a>
+                <div class="dropdown-menu" aria-labelledby="competitionDropdown">
+                    <a class="dropdown-item" th:href="@{/AdminFixtures}">Hendon Fixtures</a>
+                    <a class="dropdown-item" th:href="@{/AdminCompetitions}">Senior Competitions</a>
+                    <a class="dropdown-item" th:href="@{/AdminLeagueEntries}">League Entries</a>
+                    <a class="dropdown-item" th:href="@{/AdminLeagueFixtures}">League Fixtures</a>
+                    <a class="dropdown-item" th:href="@{/AdminLeagueTableNotes}">League Table Notes</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="youthDropdown">Youth &amp; Reserves</a>
+                <div class="dropdown-menu" aria-labelledby="youthDropdown">
+                    <a class="dropdown-item" th:href="@{/AdminYouthTeams}">Other Teams</a>
+                    <a class="dropdown-item" th:href="@{/AdminYouthNews}">Other News</a>
+                    <a class="dropdown-item" th:href="@{/AdminYouthFixtures}">Other Fixtures &amp; Results</a>
+                    <a class="dropdown-item" th:href="@{/AdminYouthTables}">Other Tables</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="staffDropdown">Staff</a>
+                <div class="dropdown-menu" aria-labelledby="staffDropdown">
+                    <a class="dropdown-item" th:href="@{/AdminStaff}">Manage Staff</a>
+                    <a class="dropdown-item" th:href="@{/AdminStaffUpdate}">Staff Updates</a>
+                </div>
+            </li>
+            <li class="nav-item d-none d-lg-block">
+                <a class="nav-link" th:href="@{/AdminGenericPages}">Generic Pages</a>
+            </li>
+            <li class="nav-item d-none d-lg-block">
+                <a class="nav-link" th:href="@{/AdminStand}">StandSponsorship</a>
+            </li>
+            <li class="nav-item d-none d-lg-block">
+                <a class="nav-link" th:href="@{/AdminSnowball}">Snowball Lottery</a>
+            </li>
+        <!--<ul class="nav navbar-nav navbar-right hidden-sm">
+        <li><a href="#">Logout</a></li>
+        </ul> -->
+        </ul>
+    </div>
+</nav>
+</body>
+</html>

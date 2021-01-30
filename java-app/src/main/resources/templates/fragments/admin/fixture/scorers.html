@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<form th:fragment="scorers" th:action="@{AdminFixtures(method=goalsSubmit,id=${param.id},season=${param.season})}" method="post">
+    <input type="hidden" name="fixtureId" id="fixtureId" th:value="${param.id}" />
+    <input type="hidden" name="season" id="season" th:value="${param.season}" />
+    <fieldset>
+        <legend>Edit Fixture Scorers</legend>
+        <th:block th:if="${fixture.hendonScore > 0}">
+            Hendon Team:<br /><br/>
+            <table class="table">
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Scorer</th>
+                    <th scope="col">Time</th>
+                    <th scope="col">Penalty</th>
+                    <th scope="col">Own Goal</th>
+                </tr>
+                <th:block th:each="player : ${hendon_goals}">
+                    <tr>
+                        <td th:text="${playerStat.count}" /></td>
+                        <td>
+                            <select th:name="'player' + ${playerStat.count}" th:id="'player' + ${playerStat.count}">
+                            <option value=""></option>
+                            <th:block th:each="squadMember : ${hendon_team}">
+                                <option th:value="${squadMember.id}" th:selected="${squadMember.player.id==player.scorer.id}" th:text="${squadMember.player.firstName} + ' ' + ${squadMember.player.lastName}"></option>
+                            </th:block>
+                            </select>
+                        </td>
+                        <td><input type="text" size="3" th:name="'time' + ${playerStat.count}" th:id="'time' + ${playerStat.count}" th:value="${player.minuteScored}" /></td>
+                        <td><input type="checkbox" th:name="'penalty' + ${playerStat.count}" th:id="'penalty' + ${playerStat.count}" th:checked="${player.penalty}" value="true" /></td>
+                        <td><input type="checkbox" th:name="'owngoal' + ${playerStat.count}" th:id="'owngoal' + ${playerStat.count}" th:checked="${player.ownGoal}" value="true" /></td>
+                    </tr>
+                </th:block>
+                <th:block th:if="${hendon_goals.size()+1 < fixture.hendonScore}">
+
+                <tr th:each="goalNum : ${#numbers.sequence(hendon_goals.size()+1, fixture.hendonScore)}">
+                    <td th:text="${goalNum}"></td>
+                    <td>
+                        <select th:name="'player' + ${goalNum}" th:id="'player' + ${goalNum}">
+                        <option value=""></option>
+                        <th:block th:each="squadMember : ${hendon_team}">
+                            <option th:value="${squadMember.id}" th:text="${squadMember.player.firstName} + ' ' + ${squadMember.player.lastName}"></option>
+                        </th:block>
+                        </select>
+                    </td>
+                    <td><input type="text" size="3" th:name="'time' + ${goalNum}" th:id="'time' + ${goalNum }"/></td>
+                    <td><input type="checkbox" th:name="'penalty' + ${goalNum}" th:id="'penalty' + ${goalNum}" value="true" /></td>
+                    <td><input type="checkbox" th:name="'owngoal' + ${goalNum}" th:id="'owngoal' + ${goalNum}" value="true" /></td>
+                </tr>
+                </th:block>
+            </table>
+        </th:block>
+        <th:block th:if="${fixture.oppositionScore > 0}">
+            Opposition Team:<br /><br/>
+            <table>
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Scorer</th>
+                    <th scope="col">Time</th>
+                    <th scope="col">Penalty</th>
+                    <th scope="col">Own Goal</th>
+                </tr>
+                <th:block th:each="player : ${opposition_goals}">
+                    <tr>
+                        <td th:text="${playerStat.count}" /></td>
+                        <td>
+                            <select th:name="'oplayer' + ${playerStat.count}" th:id="'oplayer' + ${playerStat.count}">
+                                <option value=""></option>
+                                <th:block th:each="squadMember : ${opposition_team}">
+                                    <option th:value="${squadMember.id}" th:selected="${squadMember.firstName eq player.firstName and squadMember.lastName eq player.lastName}" th:text="${squadMember.firstName} + ' ' + ${squadMember.lastName}"></option>
+                                </th:block>
+                            </select>
+                        </td>
+                        <td><input type="text" size="3" th:name="'otime' + ${playerStat.count}" th:id="'otime' + ${playerStat.count}" th:value="${player.minuteScored}" /></td>
+                        <td><input type="checkbox" th:name="'openalty' + ${playerStat.count}" th:id="'openalty' + ${playerStat.count}" th:checked="${player.penalty}" value="true" /></td>
+                        <td><input type="checkbox" th:name="'oowngoal' + ${playerStat.count}" th:id="'oowngoal' + ${playerStat.count}" th:checked="${player.ownGoal}" value="true" /></td>
+                    </tr>
+                </th:block>
+                <th:block th:if="${opposition_goals.size()+1 < fixture.oppositionScore}">
+                <tr th:each="goalNum : ${#numbers.sequence(opposition_goals.size() + 1, fixture.oppositionScore)}">
+                    <td th:text="${goalNum}"></td>
+                    <td>
+                        <select th:name="'oplayer' + ${goalNum}" th:id="'oplayer' + ${goalNum}">
+                        <option value=""></option>
+                        <th:block th:each="squadMember : ${opposition_team}">
+                            <option th:value="${squadMember.id}" th:text="${squadMember.firstName} + ' ' + ${squadMember.lastName}"></option>
+                        </th:block>
+                        </select>
+                    </td>
+                    <td><input type="text" size="3" th:name="'otime' + ${goalNum}" th:id="'otime' + ${goalNum }"/></td>
+                    <td><input type="checkbox" th:name="'openalty' + ${goalNum}" th:id="'openalty' + ${goalNum}" value="true" /></td>
+                    <td><input type="checkbox" th:name="'oowngoal' + ${goalNum}" th:id="'oowngoal' + ${goalNum}" value="true" /></td>
+                </tr>
+                </th:block>
+            </table>
+        </th:block>
+        <input type="submit" value="Add" />
+    </fieldset>
+</form>
+
+</body>
+</html>

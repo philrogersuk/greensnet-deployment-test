@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layouts/mainLayout :: layout(~{::link}, ~{::section})}">
+<head>
+	<link rel="stylesheet" type="text/css" href="css/squad.css" />
+</head>
+<body>
+<section>
+	<th:block th:if="${null ne staff_info && null ne staff_update}">
+		<div th:replace="fragments/squad/update :: update" ></div>
+	</th:block>
+	<th:block th:if="${null ne staff_info  && null eq staff_update}">
+		<div th:replace="fragments/squad/profile :: profile" ></div>
+	</th:block>
+	<th:block th:if="${null ne staff_update_list}">
+		<div th:replace="fragments/squad/updateList :: updateList" ></div>
+	</th:block>
+	<th:block th:if="${null ne staff_list}">
+		<div th:replace="fragments/squad/squadList :: squadList" ></div>
+	</th:block>
+</section>
+</body>
+</html>

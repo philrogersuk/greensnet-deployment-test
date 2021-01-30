@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layouts/mainLayout :: layout(~{::link}, ~{::section})}">
+<head>
+   <link rel="stylesheet" type="text/css" th:href="@{/css/news.css}" />
+</head>
+<body>
+<section>
+   <div class="row">
+      <div id="archivelist" class="col-sm-8 topmodule">
+         <table id="archiveList" class="table">
+            <tr th:each="year : ${#numbers.sequence(now.getYear(),firstItem.getYear())}">
+               <th scope="row" th:text="${year}">1999</th>
+               <td th:each="month : ${#numbers.sequence(1, 12)}">
+                  <a th:if="${(!(year eq firstItem.getYear() and month lt firstItem.getMonthValue()) and not (year eq now.getYear() and month gt now.getMonthValue()))}"
+                          th:href="@{${'/News/Archive/' + year + '/' + month}}"
+                          th:text="${#temporals.monthNameShort(#temporals.create(year, month, 1))} "></a>
+               </td>
+            </tr>
+         </table>
+      </div>
+
+      <div id="newsSidebar" class="col-sm-4 topmodule">
+         <div id="sidebar">
+            <script type="application/javascript" async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" />
+            <ins class="adsbygoogle" style="display: block" data-ad-client="ca-pub-0140213869397178" data-ad-slot="2289081698"
+                 data-ad-format="auto"></ins>
+            <script type="application/javascript">(adsbygoogle = window.adsbygoogle || []).push({});</script>
+         </div>
+      </div>
+   </div>
+</section>
+</body>
+</html>

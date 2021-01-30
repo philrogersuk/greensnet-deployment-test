@@ -1,0 +1,87 @@
+
+.fixture:hover {
+    background-color: #cccccc;
+}
+.score {
+    background-color: #333333;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 125%;
+}
+.competition {
+    font-weight: bold;
+}
+.date {
+    font-size: 90%;
+}
+.details {
+    font-size: 200%;
+    padding-right:10px;
+}
+h3.month {
+    padding-top: 10px;
+}
+div > h3 {
+    border-top: none;
+    padding-top: 30px;
+    margin-bottom: 0px;
+}
+.col-md-8 > div > div:first-of-type > h3,
+.col-md-4 > h3:first-of-type {
+    padding-top: 0px;
+}
+.fixture > a {
+    text-decoration: none;
+    color: #000000;
+}
+a>.moreLink {
+    margin-top: 10px;
+    text-underline-mode: none;
+    font-weight: bold;
+    border-color: #006937;
+    border-width: 1px;
+    border-style: solid;
+    text-align: center;
+    padding: 5px 0px;
+}
+a>.moreLink:hover {
+    background-color: #eeeeee;
+}
+.moreLink.current {
+    margin-top: 10px;
+    text-underline-mode: none;
+    font-weight: bold;
+    border-color: #006937;
+    border-width: 1px;
+    border-style: solid;
+    text-align: center;
+    padding: 5px 0px;
+    background-color: #006937;
+    color: #ffffff;
+}
+
+.fixture .row {
+    margin-left: -10px;
+    margin-right: -10px;
+}
+.fixture .col-1,
+.fixture .col-2,
+.fixture .col-3,
+.fixture .col-4,
+.fixture .col-8,
+.fixture .col-10 {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.fixture {
+    border-bottom-width: 1px;
+    border-bottom-color: #cccccc;
+    border-bottom-style: solid;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.moreInfo {
+    font-size: 80%;
+    font-weight: bold;
+    text-align: center;
+}

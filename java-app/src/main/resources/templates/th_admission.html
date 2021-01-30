@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layouts/mainLayout :: layout(~{::link}, ~{::section})}">
+<head>
+	<link rel="stylesheet" type="text/css" href="css/admission.css" />
+</head>
+<body>
+<section>
+	<div class="row">
+		<div id="genericmodule" class="col-sm-8 topmodule">
+			<div id="module" th:utext="${page_content}"></div>
+		</div>
+		<div id="genericsidebar" class="col-sm-4 topmodule">
+			<div id="sidebar">
+				<h3>Online Tickets</h3>
+				<table class="table" th:if="${null ne ticketed_fixtures && not ticketed_fixtures.isEmpty()}">
+					<tr>
+						<th>Date</th>
+						<th>K/O</th>
+						<th>Opposition</th>
+						<th>&nbsp;</th>
+					</tr>
+					<tr th:each="fixture : ${ticketed_fixtures}">
+						<td th:text="${#temporals.format(fixture.kickOff, 'dd MMM')}"></td>
+						<td th:text="${#temporals.format(fixture.kickOff, 'HH:mm')}"></td>
+						<td th:text="${fixture.oppositionName}"></td>
+						<td><a th:href="${fixture.ticketURL}">Buy</a></td>
+					</tr>
+				</table>
+				<p th:if="${null eq ticketed_fixtures || ticketed_fixtures.isEmpty()}">No future fixtures are currently on sale. Links will appear here when available.</p>
+
+				<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+				<ins class="adsbygoogle" style="display: block" data-ad-client="ca-pub-0140213869397178" data-ad-slot="2289081698"
+					 data-ad-format="auto"></ins>
+				<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+			</div>
+		</div>
+	</div>
+</section>
+</body>
+</html>

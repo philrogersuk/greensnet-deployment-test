@@ -1,0 +1,15 @@
+th {
+    background:#f2f2f2;
+    font-size:120%;
+    font-weight:bold;
+}
+caption {
+    display:none;
+}
+table>tbody>tr>td.player {
+    border-right: 1px solid #ddd;
+    vertical-align: middle;
+}
+.available {
+    color: #BBBBBB;
+}

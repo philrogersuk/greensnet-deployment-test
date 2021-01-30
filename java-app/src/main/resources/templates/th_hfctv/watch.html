@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layouts/mainLayout :: layout(~{::link}, ~{::section})}">
+<head>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/hfctv.css}" />
+</head>
+<body>
+<section>
+    <div class="row">
+        <div class="col-sm-9">
+<!--            <div id="hfctvInfo"></div>-->
+
+            <div class="videoWrapper">
+                <iframe th:src="@{${'https://www.youtube.com/embed/' + video.youtubeId}}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <h3>Zaxgate Pharmacy</h3>
+            <p>We are proud to work with Zaxgate Pharmacy for the 2020/21 season to bring you HFCTV for another season.</p>
+            <p>As well as providing pharmacy services, Zaxgate have a large range of cosmetics, hair care and skin care products and trained staff are always on hand to discuss your needs.</p>
+            <p>We look forward to a long, fruitful and mutually beneficial partnership.</p>
+            <a href="http://zaxgatepharmacy.co.uk/"><div class="moreLink">Zaxgate Pharmacy, Hendon</div></a>
+<!--            <div id="tags">
+                <h3>Tags</h3>
+
+                <div>Harrow Borough (4)</div>
+                <div>Highlights (42)</div>
+                <div>Interviews (471)</div>
+                <div>James Gray (31)</div>
+                <div>Lee Allinson (13)</div>
+                <br>
+                <div>All Tags</div>
+            </div>
+
+            <div id="seasons">
+                <h3>Seasons</h3>
+
+                <div>2019/2020</div>
+                <div>2018/2019</div>
+                <div>2017/2018</div>
+            </div>-->
+
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <ins class="adsbygoogle" style="display: block" data-ad-client="ca-pub-0140213869397178" data-ad-slot="2289081698"
+                 data-ad-format="auto"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+    </div>
+</section>
+</body>
+</html>

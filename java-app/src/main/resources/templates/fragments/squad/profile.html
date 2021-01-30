@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="profile" class="row">
+	<div id="mainPlayer" class="col-sm-9 topmodule">
+		<div id="profile">
+			<p th:text="${staff_info.profile}"></p>
+			<p th:if="${staff_info.atClub}"><a href="Squad">Return to squad listing</a></p>
+			<p th:if="${not staff_info.atClub}"><a th:href="@{Squad(method=archive,letter=${letter})}">Return to former staff listing</a></p>
+		</div>
+
+		<div id="genericModule">
+			<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+			<!-- Responsive -->
+			<ins class="adsbygoogle" style="display: block" data-ad-client="ca-pub-0140213869397178" data-ad-slot="2289081698"
+				 data-ad-format="auto"></ins>
+			<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+		</div>
+
+		<div th:if="${null ne player_appearances}" id="playingHistory">
+			<h3>Playing History</h3>
+			<table class="table">
+				<caption>Playing statistics</caption>
+				<tr>
+					<th rowspan="2" scope="col">Season</th>
+					<th colspan="2" scope="col">League</th>
+					<th colspan="2" scope="col">Cup</th>
+					<th colspan="2" scope="col">Total</th>
+				</tr>
+				<tr>
+					<th scope="col">P</th>
+					<th scope="col">G</th>
+					<th scope="col">P</th>
+					<th scope="col">G</th>
+					<th scope="col">P</th>
+					<th scope="col">G</th>
+				</tr>
+				<tr th:each="row : ${player_appearances}">
+					<td th:text="${row.season} + '/' + ${row.season+1}"></td>
+					<td th:text="${row.leagueApps}"</td>
+					<td th:text="${row.leagueGoals}"></td>
+					<td th:text="${row.cupApps}"></td>
+					<td th:text="${row.cupGoals}"></td>
+					<td th:text="${row.totalApps}"></td>
+					<td th:text="${row.totalGoals}"></td>
+				</tr>
+			</table>
+			<p>
+				<strong>Debut:</strong>
+				<a th:if="${null ne debut}" th:href="@{Reports(id=${debut.id})}" >
+					<th:block th:text="${#temporals.format(debut.kickOff, 'dd/MM/yyyy')}"></th:block>:
+					<th:block th:if="${'Away' eq debut.venue.venue}"
+							  th:text="${debut.opposition.name + ' ' + debut.oppositionScore + '-' +
+								debut.hendonScore + ' Hendon'}"></th:block>
+					<th:block th:if="${'Away' ne debut.venue.venue}"
+							  th:text="${'Hendon ' +  + debut.hendonScore + '-' +
+								debut.oppositionScore + ' ' + debut.opposition.name}"></th:block>
+				</a>
+				<th:block th:if="${null eq debut}">No competitive debut</th:block>
+			</p>
+		</div>
+
+		<div th:if="${null ne staff_periods}" id="staffHistory">
+			<h3>Non-Playing History</h3>
+			<table class="table">
+				<caption>Non-Playing statistics</caption>
+				<tr>
+					<th scope="col">Role</th>
+					<th scope="col">Start</th>
+					<th scope="col">End</th>
+				</tr>
+				<tr th:each="row : ${staff_periods}">
+					<td th:text="${row.staffRole.name}"></td>
+					<td th:text="${null ne row.startDate ? (#temporals.format(row.startDate , 'dd/MM/yyyy')) : (row.startSeason + '/' + (row.startSeason+1))}"></td>
+					<td th:text="${null ne row.endDate ? (#temporals.format(row.endDate , 'dd/MM/yyyy')) : (-1 ne row.endSeason ? (row.endSeason + '/' + (row.endSeason+1)) : 'To Date')}"></td>
+				</tr>
+			</table>
+		</div>
+
+		<div th:if="${staff_info.atClub}" id="sponsors">
+			<h3>Sponsors</h3>
+			<table class="table">
+				<caption>Sponsors</caption>
+				<tr>
+					<th scope="column">&nbsp;</th>
+					<th scope="column">Sponsor 1</th>
+					<th scope="column">Sponsor 2</th>
+				</tr>
+				<tr>
+					<th scope="row">Home Kit</th>
+					<td>
+						<span th:if="${null ne staff_info.fullKit && '' ne staff_info.fullKit}" th:text="${staff_info.fullKit}"></span>
+						<a th:if="${null eq staff_info.fullKit || '' eq staff_info.fullKit}" href="Sponsorship?method=players">This is available for £90. Click for more info.</a>
+					</td>
+					<td>
+						<span th:if="${null ne staff_info.fullKitTwo && '' ne staff_info.fullKitTwo}" th:text="${staff_info.fullKitTwo}"></span>
+						<a th:if="${null eq staff_info.fullKitTwo || '' eq staff_info.fullKitTwo}" href="Sponsorship?method=players">This is available for £90. Click for more info.</a>
+					</td>
+				</tr>
+				<tr>
+					<th scope="row">Away Kit</th>
+					<td>
+						<span th:if="${null ne staff_info.awayKit && '' ne staff_info.awayKit}" th:text="${staff_info.awayKit}"></span>
+						<a th:if="${null eq staff_info.awayKit || '' eq staff_info.awayKit}" href="Sponsorship?method=players">This is available for £60. Click for more info.</a>
+					</td>
+					<td>
+						<span th:if="${null ne staff_info.awayKitTwo && '' ne staff_info.awayKitTwo}" th:text="${staff_info.fullKitTwo}"></span>
+						<a th:if="${null eq staff_info.awayKitTwo || '' eq staff_info.awayKitTwo}" href="Sponsorship?method=players">This is available for £60. Click for more info.</a>
+					</td>
+				</tr>
+				<tr>
+					<th scope="row">Socks</th>
+					<td>
+						<span th:if="${null ne staff_info.socks && '' ne staff_info.socks}" th:text="${staff_info.socks}"></span>
+						<a th:if="${null eq staff_info.socks || '' eq staff_info.socks}" href="Sponsorship?method=players">This is available for £5. Click for more info.</a>
+					</td>
+					<td>
+						<span th:if="${null ne staff_info.socksTwo && '' ne staff_info.socksTwo}" th:text="${staff_info.socksTwo}"></span>
+						<a th:if="${null eq staff_info.socksTwo || '' eq staff_info.socksTwo}" href="Sponsorship?method=players">This is available for £5. Click for more info.</a>
+					</td>
+				</tr>
+				<tr>
+					<th scope="row">Corporate</th>
+					<td colspan="2">
+						<span th:if="${null ne staff_info.corporate && '' ne staff_info.corporate}">
+							<img th:src="${staff_info.corporateSponsorImage}" th:if="${null ne staff_info.corporateSponsorImage}"/>
+							<th:block th:text="${staff_info.corporate}"></th:block>
+						</span>
+						<a th:if="${null eq staff_info.corporate || '' eq staff_info.corporate}" href="Sponsorship?method=players">This is available for £120. Click for more info.</a>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+	<div class="col-sm-3">
+		<div id="playerSidebar">
+			<h3>Basic Info</h3>
+			<img th:if="${null ne staff_info.publicUrl && '' ne staff_info.publicUrl}" th:src="${staff_info.publicUrl}" alt="Player Profile" />
+			<img th:if="${null eq staff_info.publicUrl || '' eq staff_info.publicUrl}" src="images/staff/noimage.png" alt="Player Profile" />
+			<table class="table">
+				<caption>Personal details</caption>
+				<tr>
+					<th scope="row">DoB</th>
+					<td th:text="${null ne staff_info.dateOfBirth ? #temporals.format(staff_info.dateOfBirth , 'dd/MM/yyyy') : 'Unknown'}"></td>
+				</tr>
+				<tr>
+					<th scope="row">Apps</th>
+					<td th:text="${staff_info.isPlayer ? total_apps : 'N/A'}"></td>
+				</tr>
+				<tr>
+					<th scope="row">Goals</th>
+					<td th:text="${staff_info.isPlayer ? total_goals : 'N/A'}"></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>
+</body>
+</html>

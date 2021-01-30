@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<table th:fragment="grid">
+    <tr>
+        <th scope="col">&nbsp;</th>
+        <th scope="col">&nbsp;</th>
+        <th scope="col" th:each="item, status : ${fixture_grid.rows}" th:text="${status.count}"></th>
+    </tr>
+    <tr th:each="row, status : ${fixture_grid.rows}">
+        <th scope="row" th:text="${status.count}"></th>
+        <th scope="row" th:text="${row.club.name}"></th>
+        <td th:each="fixture: ${row.fixtures}">
+            <a th:href="@{AdminLeagueFixtures(method=edit,id=${fixture.id},season=${selected_season},competition=${selected_competition})}"
+               th:if="${null ne fixture}" th:text="${fixture.homeGoals} + '-' + ${fixture.awayGoals}">
+            </a>
+            <th:block th:if="${null eq fixture}">-</th:block>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

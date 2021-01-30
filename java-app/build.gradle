@@ -1,0 +1,106 @@
+
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version "$springBootVersion"
+    id 'com.google.cloud.tools.jib' version '2.7.0'
+    id "io.freefair.lombok" version "5.3.0"
+    id 'eu.davidea.grabver'
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'jacoco'
+
+dependencies {
+    runtimeOnly project(':npm-app')
+
+    implementation platform('software.amazon.awssdk:bom:2.15.40')
+
+    implementation "org.springframework.boot:spring-boot-starter-web:$springBootVersion"
+    implementation "org.springframework.boot:spring-boot-starter-logging:$springBootVersion"
+    implementation "org.springframework.boot:spring-boot-starter-data-jpa:$springBootVersion"
+    implementation "org.springframework.boot:spring-boot-starter-thymeleaf:$springBootVersion"
+    implementation "org.springframework.boot:spring-boot-starter-tomcat:$springBootVersion"
+    implementation "org.springframework.boot:spring-boot-starter-security:$springBootVersion"
+
+    implementation 'software.amazon.awssdk:s3'
+
+    implementation "mysql:mysql-connector-java:8.0.22"
+    implementation 'com.rosaloves:bitlyj:1.0'
+    implementation 'org.twitter4j:twitter4j-core:4.0.7'
+    implementation 'com.google.guava:guava:30.0-jre'
+    implementation 'net.coobird:thumbnailator:0.4.13'
+
+    testImplementation ("org.springframework.boot:spring-boot-starter-test:$springBootVersion") {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+    testImplementation 'org.assertj:assertj-core:3.18.1'
+    testImplementation 'org.mockito:mockito-core:3.6.28'
+    testImplementation 'com.h2database:h2:1.4.200'
+    testImplementation 'org.apache.commons:commons-lang3:3.11'
+}
+
+group = 'net.hendonfc'
+archivesBaseName = 'greensnet'
+version = versioning.major + '.' + versioning.minor + '.' + versioning.patch + '.' + versioning.build
+description = 'Greensnet'
+sourceCompatibility = 11
+targetCompatibility = 11
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+repositories {
+    mavenCentral()
+    jcenter()
+    google()
+}
+publishing {
+    publications {
+        gpr(MavenPublication) {
+            groupId 'net.hendonfc'
+            artifactId "$archivesBaseName"
+            version "$version"
+
+            from components.java
+        }
+    }
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = "https://maven.pkg.github.com/philrogersuk/greensnet"
+            credentials {
+                username = System.getenv("GITHUB_ACTOR")
+                password = System.getenv("GITHUB_TOKEN")
+            }
+        }
+    }
+}
+
+versioning {
+    // Required (number)
+    major 1
+    minor 0
+}
+bootJar {
+    launchScript()
+}
+test {
+    useJUnitPlatform()
+
+    finalizedBy jacocoTestReport
+}
+
+jacocoTestReport {
+    dependsOn test
+    reports {
+        xml.enabled true
+        xml.destination file("${buildDir}/reports/jacoco/report.xml")
+        csv.enabled false
+        html.enabled false
+    }
+}
+

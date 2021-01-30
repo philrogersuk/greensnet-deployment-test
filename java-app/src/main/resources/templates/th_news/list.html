@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layouts/mainLayout :: layout(~{::link}, ~{::section})}">
+<head>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/news.css}" />
+</head>
+<body>
+<section>
+	<div class="row">
+		<div id="newsitems" class="col-sm-8 topmodule">
+			<a th:each="item : ${newsItems}" th:href="@{${'/News/' + item.id + '/' + item.headlineAsEncodedString}}">
+			<div class="row newsitem">
+				<div class="col-sm-4">
+					<img th:src="@{/images/news/defaultNews.png}" class="img-fluid"/>
+				</div>
+				<div class="col-sm-8">
+					<h3 th:text="${item.headline}"></h3>
+					<div th:utext="${item.firstSentence + '.'}"></div>
+					<!--div id="publishDate" th:text="${#temporals.format(item.timeOfRelease , 'EEE dd MMM yyyy, HH:mm')}">13:21, 20/01/2020</div-->
+				</div>
+			</div>
+			</a>
+		</div>
+
+		<div id="newsSidebar" class="col-sm-4 topmodule">
+			<div id="sidebar" th:with="date=${#temporals.create(year, month, 1)}">
+
+				<h3>More News</h3>
+
+				<a th:href="@{/News}"><div class="moreNewsLink">Latest News</div></a>
+				<a th:if="${date.plusMonths(2).isBefore(#temporals.createToday().withDayOfMonth(2))}" th:href="@{${'/News/Archive/' + #temporals.format(date.plusMonths(2), 'yyyy') + '/' + #temporals.format(date.plusMonths(2), 'MM')}}"><div class="moreNewsLink" th:text="${'News from ' + #temporals.format(date.plusMonths(2), 'MMMM yyyy')}">More from January 2020</div></a>
+				<a th:if="${date.plusMonths(1).isBefore(#temporals.createToday().withDayOfMonth(2))}" th:href="@{${'/News/Archive/' + #temporals.format(date.plusMonths(1), 'yyyy') + '/' + #temporals.format(date.plusMonths(1), 'MM')}}"><div class="moreNewsLink" th:text="${'News from ' + #temporals.format(date.plusMonths(1), 'MMMM yyyy')}">More from January 2020</div></a>
+				<div class="moreNewsLink current" th:text="${'News from ' + #temporals.format(date, 'MMMM yyyy')}">More from January 2020</div>
+				<a th:if="${date.minusMonths(1).isAfter(#temporals.create(1999, 10, 31))}" th:href="@{${'/News/Archive/' + #temporals.format(date.minusMonths(1), 'yyyy') + '/' + #temporals.format(date.minusMonths(1), 'MM')}}"><div class="moreNewsLink" th:text="${'News from ' + #temporals.format(date.minusMonths(1), 'MMMM yyyy')}">More from January 2020</div></a>
+				<a th:if="${date.minusMonths(2).isAfter(#temporals.create(1999, 10, 31))}" th:href="@{${'/News/Archive/' + #temporals.format(date.minusMonths(2), 'yyyy') + '/' + #temporals.format(date.minusMonths(2), 'MM')}}"><div class="moreNewsLink" th:text="${'News from ' + #temporals.format(date.minusMonths(2), 'MMMM yyyy')}">More from January 2020</div></a>
+
+				<script type="application/javascript" async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" />
+				<ins class="adsbygoogle" style="display: block" data-ad-client="ca-pub-0140213869397178" data-ad-slot="2289081698"
+					 data-ad-format="auto"></ins>
+				<script type="application/javascript">(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+			</div>
+		</div>
+	</div>
+</section>
+</body>
+</html>

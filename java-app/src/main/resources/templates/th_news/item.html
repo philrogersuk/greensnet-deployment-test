@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layouts/mainLayout :: layout(~{::link}, ~{::section})}">
+<head>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/news.css}" />
+</head>
+<body>
+<section>
+	<div class="row">
+		<div id="newsItems" class="col-sm-8 topmodule">
+			<div class="newsitem">
+				<div class="details">
+					<img th:src="@{/images/crest160.png}" id="avatar" />
+					<div id="author" th:text="${null ne newsItem.author ? newsItem.author : 'Greensnet Editor'}"></div>
+					<div id="publishDate" th:text="${#temporals.format(newsItem.timeOfRelease , 'EEE dd MMM yyyy, HH:mm')}">13:21, 20/01/2020</div>
+				</div>
+				<img th:src="@{/images/news/defaultNews.png}" />
+
+				<div th:utext="${newsItem.storyAsHtml}"></div>
+
+				<div class="videoWrapper" th:if="${null ne youtube_video}">
+					<iframe th:src="@{${'https://www.youtube.com/embed/' + youtube_video.youtubeId}}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+				</div>
+			</div>
+		</div>
+
+		<div id="newsSidebar" class="col-sm-4 topmodule">
+			<div id="sidebar">
+				<h3>More News</h3>
+
+				<div id="nextNewsItem" th:if="${null ne nextItem}">
+					<b>Next</b>:
+					<a th:href="@{${'/News/' + nextItem.id + '/' + nextItem.headlineAsEncodedString}}" th:text="${nextItem.headline}">Something or other</a>
+				</div>
+				<div id="previousNewsItem" th:if="${null ne previousItem}">
+					<b>Previous</b>:
+					<a th:href="@{${'/News/' + previousItem.id + '/' + previousItem.headlineAsEncodedString}}" th:text="${previousItem.headline}">Something or other</a>
+				</div>
+				<br />
+				<a th:href="@{/News}"><div class="moreNewsLink">Latest News</div></a>
+				<a th:href="@{${'/News/Archive/' + #temporals.format(newsItem.getTimeOfRelease(), 'yyyy') + '/' + #temporals.format(newsItem.getTimeOfRelease(), 'MM')}}"><div class="moreNewsLink" th:text="${'More from ' + #temporals.format(newsItem.getTimeOfRelease(), 'MMMM yyyy')}">More from January 2020</div></a>
+
+				<!--<div id="reactMoreButtonTest"></div>-->
+				<script type="application/javascript" async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" />
+				<ins class="adsbygoogle" style="display: block" data-ad-client="ca-pub-0140213869397178" data-ad-slot="2289081698"
+					 data-ad-format="auto"></ins>
+				<script type="application/javascript">(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+
+			</div>
+		</div>
+	</div>
+
+	<script th:src="@{/js/MoreDetailsLink.js}"></script>
+	<script type="application/javascript">
+		MoreDetailsLink.components.init(document.getElementById('reactMoreButtonTest'),
+		'http://hendonfc.net',
+		'Test Button');
+	</script>
+</section>
+</body>
+</html>

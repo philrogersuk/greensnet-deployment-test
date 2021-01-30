@@ -1,0 +1,8 @@
+*.db
+/logs
+/target
+/.idea
+*.iml
+/npm-app/build_packageNpmApp/
+/npm-app/.gradle/
+/.gradle

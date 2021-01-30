@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layouts/mainLayout :: layout(~{::link}, ~{::section})}">
+<head>
+    <link rel="stylesheet" type="text/css" th:href="@{'/css/fixtures.css'}" />
+</head>
+<body>
+<section>
+    <div class="row">
+        <div class="col-md-8">
+            <div th:replace="~{fragments/fixtures/list :: list}" ></div>
+        </div>
+        <div class="col-md-4">
+            <h3 th:text="${'More From ' + currentSeason + '/' + (currentSeason + 1)}">More From 2018/2019</h3>
+            <a th:href="@{${'/Appearances/' + currentSeason}}"><div class="moreLink">Player Appearances</div></a>
+            <a th:href="@{${'/Tables/' + currentSeason}}"><div class="moreLink">Tables</div></a>
+
+            <h3>More Fixtures &amp; Results</h3>
+
+            <div id="nextSeason" th:if="${null ne nextSeason}">
+                <a th:href="@{${'/Fixtures/' + nextSeason}}"><div class="moreLink" th:text="${#numbers.formatInteger(nextSeason, 2) + '/' + #numbers.formatInteger((nextSeason+1)%100, 2)}">2018/19</div></a>
+            </div>
+            <div class="moreLink current" th:text="${#numbers.formatInteger(currentSeason, 2) + '/' + #numbers.formatInteger((currentSeason+1)%100, 2)}">2018/19</div>
+            <div id="previousSeason" th:if="${null ne previousSeason}">
+                <a th:href="@{${'/Fixtures/' + previousSeason}}"><div class="moreLink" th:text="${#numbers.formatInteger(previousSeason, 2) + '/' + #numbers.formatInteger((previousSeason+1)%100, 2)}">2018/19</div></a>
+            </div>
+            <br />
+            <a th:href="@{'/Fixtures/Archive'}"><div class="moreLink">Fixture Archives</div></a>
+
+
+            <script type="application/javascript" async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" />
+            <ins class="adsbygoogle" style="display: block" data-ad-client="ca-pub-0140213869397178" data-ad-slot="2289081698"
+                 data-ad-format="auto"></ins>
+            <script type="application/javascript">(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+        </div>
+    </div>
+</section>
+</body>
+</html>

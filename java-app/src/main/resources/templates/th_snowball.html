@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layouts/mainLayout :: layout(~{::link}, ~{::section})}">
+<head>
+	<link rel="stylesheet" type="text/css" href="css/snowball.css" />
+</head>
+<body>
+<section>
+	<div class="row">
+		<div class="col-12">
+			<th:block th:utext="${page_content}"></th:block>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-12">
+			<th:block th:if="${null ne snowball_draws or not snowball_draws.isEmpty()}">
+				<h3>Previous Winners</h3>
+				<table class="table">
+					<caption>Previous Snowball Lottery winners</caption>
+					<tr>
+						<th scope="col">Draw</th>
+						<th scope="col">Members</th>
+						<th scope="col">Winner</th>
+						<th scope="col">1st Prize</th>
+						<th scope="col">2nd Ball</th>
+						<th scope="col">2nd Prize</th>
+						<th scope="col">To Snowballer</th>
+						<th scope="col">To Trust</th>
+					</tr>
+					<tr th:each="draw : ${snowball_draws}">
+						<th:block th:if="${draw.snowballDraw}">
+							<td th:text="${draw.name}"></td>
+							<td>&nbsp;</td>
+							<td th:text="${draw.firstPrizeWinner}"></td>
+							<td th:text="${'&pound;' + #numbers.formatDecimal(draw.firstPrize, 2, 2)}"></td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+						</th:block>
+
+						<th:block th:if="${not draw.snowballDraw}">
+							<td th:text="${draw.name}"></td>
+							<td th:text="${draw.numEntries}"></td>
+							<td th:text="${draw.firstPrizeWinner}"></td>
+							<td th:text="${'&pound;' + #numbers.formatDecimal(draw.firstPrize, 2, 2)}"></td>
+							<td th:text="${draw.secondPrizeWinner}"></td>
+							<td th:text="${'&pound;' + #numbers.formatDecimal(draw.secondPrize, 2, 2)}"></td>
+							<td th:text="${'&pound;' + #numbers.formatDecimal(draw.snowballContribution, 2, 2)}"></td>
+							<td th:text="${'&pound;' + #numbers.formatDecimal(draw.trustContribution, 2, 2)}"></td>
+						</th:block>
+					</tr>
+				</table>
+			</th:block>
+		</div>
+	</div>
+</section>
+</body>
+</html>

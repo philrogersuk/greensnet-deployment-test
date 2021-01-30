@@ -1,0 +1,9 @@
+#sidebar h3 {
+    border-top-style: none;
+}
+
+th {
+    background:#f2f2f2;
+    font-size:120%;
+    font-weight:bold;
+}

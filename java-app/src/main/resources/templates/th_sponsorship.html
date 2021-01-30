@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layouts/mainLayout :: layout(~{::link}, ~{::section})}">
+<head>
+	<link rel="stylesheet" type="text/css" href="css/sponsorship.css" />
+</head>
+<body>
+<section>
+	<div class="row">
+	<div id="genericmodule" class="col-sm-8 topmodule">
+		<div id="module">
+			<th:block th:utext="${page_content}"></th:block>
+			<th:block th:if="${null ne matchball_sponsors and '' ne matchball_sponsors}">
+				<table class="table">
+					<caption>Current Sponsors</caption>
+					<tr>
+						<th scope="col">Date</th>
+						<th scope="col">Opposition</th>
+						<th scope="col">Sponsor</th>
+					</tr>
+					<tr th:each="match : ${matchball_sponsors}">
+						<td th:text="${#temporals.format(match.kickOff, 'dd/MM/yy')}"></td>
+						<td th:text="${match.competition.type ne T(net.greensnet.competition.domain.CompetitionType).LEAGUE ? match.opposition.name : match.opposition.name + ' (' + match.competition.shortCode + ')'}"></td>
+						<td th:text="${match.matchballSponsor}"></td>
+					</tr>
+				</table>
+			</th:block>
+			<th:block th:if="${null ne match_sponsors and '' ne match_sponsors}">
+				<table class="table">
+					<caption>Current Sponsors</caption>
+					<tr>
+						<th scope="col">Date</th>
+						<th scope="col">Opposition</th>
+						<th scope="col">Sponsor</th>
+					</tr>
+					<tr th:each="match : ${match_sponsors}">
+						<td th:text="${#temporals.format(match.kickOff, 'dd/MM/yy')}"></td>
+						<td th:text="${match.competition.type ne T(net.greensnet.competition.domain.CompetitionType).LEAGUE ? match.opposition.name : match.opposition.name + ' (' + match.competition.shortCode + ')'}"></td>
+						<td th:text="${match.matchSponsor}"></td>
+					</tr>
+				</table>
+			</th:block>
+			<th:block th:if="${null ne programme_sponsors and '' ne programme_sponsors}">
+				<table class="table">
+					<caption>Current Sponsors</caption>
+					<tr>
+						<th scope="col">Date</th>
+						<th scope="col">Opposition</th>
+						<th scope="col">Sponsor</th>
+					</tr>
+					<tr th:each="match : ${programme_sponsors}">
+						<td th:text="${#temporals.format(match.kickOff, 'dd/MM/yy')}"></td>
+						<td th:text="${match.competition.type ne T(net.greensnet.competition.domain.CompetitionType).LEAGUE ? match.opposition.name : match.opposition.name + ' (' + match.competition.shortCode + ')'}"></td>
+						<td th:text="${match.programmeSponsor}"></td>
+					</tr>
+				</table>
+			</th:block>
+			<th:block th:if="${null ne hfctv_sponsors and '' ne hfctv_sponsors}">
+				<table class="table">
+					<caption>Current Sponsors</caption>
+					<tr>
+						<th scope="col">Date</th>
+						<th scope="col">Opposition</th>
+						<th scope="col">Sponsor</th>
+					</tr>
+					<tr th:each="match : ${hfctv_sponsors}">
+						<td th:text="${#temporals.format(match.kickOff, 'dd/MM/yy')}"></td>
+						<td th:text="${match.competition.type ne T(net.greensnet.competition.domain.CompetitionType).LEAGUE ? match.opposition.name : match.opposition.name + ' (' + match.competition.shortCode + ')'}"></td>
+						<td th:text="${match.hfctvSponsor}"></td>
+					</tr>
+				</table>
+			</th:block>
+			<th:block th:if="${null ne player_sponsors and '' ne player_sponsors}">
+				<table class="table">
+					<caption>Current Sponsors</caption>
+					<tr>
+						<th scope="col">Name</th>
+						<th scope="col"></th>
+						<th scope="col">Sponsor 1</th>
+						<th scope="col">Sponsor 2</th>
+					</tr>
+					<th:block th:each="player : ${player_sponsors}">
+						<tr>
+							<td rowspan="4" th:text="${player.firstName + ' ' + player.lastName}"></td>
+							<td><b>Home Kit</b></td>
+							<td th:text="${player.fullKit}"></td>
+							<td th:text="${player.fullKitTwo}"></td>
+						</tr>
+						<tr>
+							<td><b>Away Kit</b></td>
+							<td th:text="${player.awayKit}"></td>
+							<td th:text="${player.awayKitTwo}"></td>
+						</tr>
+						<tr>
+							<td><b>Socks</b></td>
+							<td th:text="${player.socks}"></td>
+							<td th:text="${player.socksTwo}"></td>
+						</tr>
+						<tr>
+							<td><b>Corporate Sponsors</b></td>
+							<td colspan="2">
+								<img th:src="${player.corporateSponsorImage}" th:if="${null ne player.corporateSponsorImage}"/>
+								<th:block th:text="${player.corporate}"></th:block></td>
+						</tr>
+					</th:block>
+				</table>
+			</th:block>
+		</div>
+	</div>
+	<div id="genericsidebar" class="col-sm-4 topmodule">
+		<div id="sidebar">
+			<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+			<ins class="adsbygoogle" style="display: block" data-ad-client="ca-pub-0140213869397178" data-ad-slot="2289081698"
+				 data-ad-format="auto"></ins>
+			<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+		</div>
+	</div>
+</div>
+</section>
+</body>
+</html>

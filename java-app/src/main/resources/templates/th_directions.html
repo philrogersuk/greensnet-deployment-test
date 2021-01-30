@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layouts/mainLayout :: layout(~{::link}, ~{::section})}">
+<head>
+	<link rel="stylesheet" type="text/css" href="css/directions.css" />
+</head>
+<body>
+<section>
+	<div class="row">
+		<div id="genericmodule" class="col-sm-8 topmodule">
+			<div id="module">
+				<th:block th:if="${club_info.hasDirections()}">
+					<h3 th:if="${club_info.directionsByCar ne null && club_info.directionsByCar ne ''}">By Car</h3>
+					<p th:if="${club_info.directionsByCar ne null && club_info.directionsByCar ne ''}" th:text="${club_info.directionsByCar}"></p>
+					<h3 th:if="${club_info.directionsByTrain ne null && club_info.directionsByTrain ne ''}">By Train</h3>
+					<p th:if="${club_info.directionsByTrain ne null && club_info.directionsByTrain ne ''}" th:text="${club_info.directionsByTrain}"></p>
+					<h3 th:if="${club_info.directionsByTube ne null && club_info.directionsByTube ne ''}">By Tube</h3>
+					<p th:if="${club_info.directionsByTube ne null && club_info.directionsByTube ne ''}" th:text="${club_info.directionsByTube}"></p>
+					<h3 th:if="${club_info.directionsByBus ne null && club_info.directionsByBus ne ''}">By Bus</h3>
+					<p th:if="${club_info.directionsByBus ne null && club_info.directionsByBus ne ''}" th:text="${club_info.directionsByBus}"></p>
+					<p th:if="${club_info.postcode ne null && club_info.postcode ne ''}"><a th:href="${'http://maps.google.co.uk/maps?f=q&hl=en&geocode=&q=' + club_info.postcodeForMap + '&ie=UTF8&t=h&z=16'}">Click here for Map</a></p>
+				</th:block>
+				<th:block th:if="${!club_info.hasDirections()}">
+					<p th:text="${'No directions available for ' + club_info.getInternalName}"></p>
+				</th:block>
+			</div>
+		</div>
+		<div id="genericsidebar" class="col-sm-4 topmodule">
+			<div id="sidebar">
+				<h3>Other Clubs</h3>
+				<ul>
+				<li th:each="club : ${club_list}">
+					<div>
+						<a th:href="@{Directions(id=${club.id})}" th:text="${club.getInternalName}"></a>
+					</div>
+				</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</section>
+</body>
+</html>

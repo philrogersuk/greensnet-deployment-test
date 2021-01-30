@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layouts/mainLayout :: layout(~{::link}, ~{::section})}">
+<head>
+    <link rel="stylesheet" type="text/css" href="css/hfctv.css" />
+</head>
+<body>
+<section>
+    <div class="row">
+        <div class="col-sm-9">
+            <div id="hfctvInfo">We are in the process of building up the full archive of HFCTV videos at the moment. In the meantime, all HFCTV content can be found at <a href="https://www.youtube.com/HendonFCOfficial/">youtube.com/HendonFCOfficial</a>. You can also subscribe on Youtube to ensure you see all the latest from the team at HFCTV.</div>
+
+            <div id="videos" th:if="${videos.size() gt 0}">
+                <div class="row" th:each="index : ${#numbers.sequence(0, videos.size()-1, 3)}">
+                    <div class="col-4">
+                        <a th:href="@{${'/HFCTV/' + videos.get(index).id}}"><img th:src="@{${'https://img.youtube.com/vi/' + videos.get(index).youtubeId + '/mqdefault.jpg'}}" class="img-fluid"></a>
+                    </div>
+                    <div class="col-4" th:if="${index + 1 < videos.size()}">
+                        <a th:href="@{${'/HFCTV/' + videos.get(index + 1).id}}"><img th:src="@{${'https://img.youtube.com/vi/' + videos.get(index + 1).youtubeId + '/mqdefault.jpg'}}" class="img-fluid"></a>
+                    </div>
+                    <div class="col-4" th:if="${index + 2 < videos.size()}">
+                        <a th:href="@{${'/HFCTV/' + videos.get(index + 2).id}}"><img th:src="@{${'https://img.youtube.com/vi/' + videos.get(index + 2).youtubeId + '/mqdefault.jpg'}}" class="img-fluid"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <h3>Zaxgate Pharmacy</h3>
+            <p>We are proud to work with Zaxgate Pharmacy for the 2020/21 season to bring you HFCTV for another season.</p>
+            <p>As well as providing pharmacy services, Zaxgate have a large range of cosmetics, hair care and skin care products and trained staff are always on hand to discuss your needs.</p>
+            <p>We look forward to a long, fruitful and mutually beneficial partnership.</p>
+            <a href="http://zaxgatepharmacy.co.uk/"><div class="moreLink">Zaxgate Pharmacy, Hendon</div></a>
+<!--            <div id="tags">
+                <h3>Tags</h3>
+
+                <div>Harrow Borough (4)</div>
+                <div>Highlights (42)</div>
+                <div>Interviews (471)</div>
+                <div>James Gray (31)</div>
+                <div>Lee Allinson (13)</div>
+                <br>
+                <div>All Tags</div>
+            </div>
+
+            <div id="seasons">
+                <h3>Seasons</h3>
+
+                <div>2019/2020</div>
+                <div>2018/2019</div>
+                <div>2017/2018</div>
+            </div>-->
+
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <ins class="adsbygoogle" style="display: block" data-ad-client="ca-pub-0140213869397178" data-ad-slot="2289081698"
+                 data-ad-format="auto"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+    </div>
+</section>
+</body>
+</html>

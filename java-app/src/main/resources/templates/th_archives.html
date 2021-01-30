@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layouts/mainLayout :: layout(~{::link}, ~{::section})}">
+<head>
+	<link rel="stylesheet" type="text/css" href="css/genericpage.css" />
+</head>
+<body>
+<section>
+	<div class="row">
+		<div class="col-sm-6">
+			<h3>Results and Match Details</h3>
+			<p>Look at our playing record since our formation in 1908, including lineups and scorers for all fixtures we have details for
+				as well as match reports where available. Currently includes details of over 5800 fixtures.</p>
+			<a href="Fixtures/Archive"><div class="moreLink">Match Archives</div></a>
+		</div>
+		<div class="col-sm-6">
+			<h3>League Tables</h3>
+			<p>View over 25 years of first team league tables from 1996 through to the present day. We hope to add a full archive back to 1908 in the near future.</p>
+			<a href="Tables/Archive"><div class="moreLink">Table Archives</div></a>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-sm-6">
+			<h3>Player and Staff Profiles</h3>
+			<p>Details of over 2440 of our playing and non-playing staff members' records at the club, including profiles, appearance and goal information where available.</p>
+			<a href="Squad?method=archive"><div class="moreLink">Player Archives</div></a>
+		</div>
+		<div class="col-sm-6">
+			<h3>Appearances</h3>
+			<p>Season-by-season listings of all known playing records for the club. Early records are known to be incomplete, but we are continuing to research
+				additional information where possible.</p>
+			<a href="Appearances/Archive"><div class="moreLink">Appearance Archives</div></a>
+		</div>
+	</div>
+</section>
+</body>
+</html>

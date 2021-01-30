@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="footer (now)" class="footer">
+	<p th:text="'The content of this site is &copy; 1999-' + ${#temporals.year(now)} + ' Greensnet and Hendon Football Club.'" class="text-center">The content of this site is &copy; 1999-2019 Greensnet and Hendon Football Club.</p>
+	<p class="text-center">Hendon Football Club is a trading name of Hendon Football Club (2008) Limited,
+		a wholly owned subsidary of Hendon Football Club Supporters' Society Limited.</p>
+</div>
+
+</body>
+</html>

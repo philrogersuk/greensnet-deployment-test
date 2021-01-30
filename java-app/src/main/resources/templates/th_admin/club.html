@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layouts/adminLayout :: layout(~{::link}, ~{::section})}">
+<head>
+    <link rel="stylesheet" type="text/css" href="/css/admin/generic.css" />
+</head>
+<body>
+<section>
+
+    <div class="row">
+        <div id="genericmodule" class="col-sm-8 topmodule">
+            <div id="module">
+                <div class="letterMenu">
+                    <th:block th:each="letter : ${#strings.arraySplit('A B C D E F G H I J K L M N O P Q R S T U V W X Y Z',' ')}">
+                        <a th:href="@{AdminClubs(method='list',letter=${letter})}" th:text="${letter}">A</a>
+                    </th:block></div>
+                <p>
+                    <th:block th:each="club : ${club_list}">
+                    <a th:href="@{AdminClubs(method='edit',id=${club.id})}" th:text="${club.getInternalName}">Harrow Borough</a><br />
+                    </th:block>
+                </p>
+                <form th:if="null != ${club_info}" action="AdminClubs?method=editSubmit" method="post">
+                    <a th:href="@{${'AdminCrest/' + club_info.id}}">Edit Crests</a>
+                    <br /><br />
+
+                    <input type="hidden" name="id" id="id" th:value="${club_info.id}" /><br /><br />
+                    <label for="name">Full Name:</label>
+                    <input type="text" name="name" id="name" th:value="${club_info.getInternalName}" /><br /><br />
+                    <label for="shortname">Short Name:</label>
+                    <input type="text" name="shortname" id="shortname" th:value="${club_info.shortName}" /><br /><br />
+                    <label for="tla">Three Letter Acronym:</label>
+                    <input type="text" name="tla" id="tla" th:value="${club_info.tla}" /><br /><br />
+                    <label for="postcode">Postcode:</label>
+                    <input type="text" name="postcode" id="postcode" th:value="${club_info.postcode}" /><br /><br />
+                    <label for="yearFounded">Year Formed:</label>
+                    <input type="text" name="yearFounded" id="yearFounded" th:value="${club_info.yearFounded}" /><br /><br />
+                    <label for="directionsByCar">Directions By Car:</label>
+                    <textarea name="directionsByCar" id="directionsByCar" cols="50" rows="8" th:text="${club_info.directionsByCar}"></textarea><br /><br />
+                    <label for="directionsByTrain">Directions By Train:</label>
+                    <textarea name="directionsByTrain" id="directionsByTrain" cols="50" rows="8" th:text="${club_info.directionsByTrain}"></textarea><br /><br />
+                    <label for="directionsByTube">Directions By Tube:</label>
+                    <textarea name="directionsByTube" id="directionsByTube" cols="50" rows="8" th:text="${club_info.directionsByTube}"></textarea><br /><br />
+                    <label for="directionsByBus">Directions By Bus:</label>
+                    <textarea name="directionsByBus" id="directionsByBus" cols="50" rows="8" th:text="${club_info.directionsByBus}"></textarea><br /><br />
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                    <input type="submit" value="Edit" />
+                </form>
+                <form th:if="null == ${club_info}" action="AdminClubs?method=add" method="post">
+                    <label for="name">Full Name:</label>
+                    <input type="text" name="name" id="name" /><br /><br />
+                    <label for="shortname">Short Name:</label>
+                    <input type="text" name="shortname" id="shortname" /><br /><br />
+                    <label for="tla">Three Letter Acronym:</label>
+                    <input type="text" name="tla" id="tla" /><br /><br />
+                    <label for="postcode">Postcode:</label>
+                    <input type="text" name="postcode" id="postcode" /><br /><br />
+                    <label for="yearFounded">Year Formed:</label>
+                    <input type="text" name="yearFounded" id="yearFounded" /><br /><br />
+                    <label for="directionsByCar">Directions By Car:</label>
+                    <textarea name="directionsByCar" id="directionsByCar" cols="50" rows="8"></textarea><br /><br />
+                    <label for="directionsByTrain">Directions By Train:</label>
+                    <textarea name="directionsByTrain" id="directionsByTrain" cols="50" rows="8"></textarea><br /><br />
+                    <label for="directionsByTube">Directions By Tube:</label>
+                    <textarea name="directionsByTube" id="directionsByTube" cols="50" rows="8"></textarea><br /><br />
+                    <label for="directionsByBus">Directions By Bus:</label>
+                    <textarea name="directionsByBus" id="directionsByBus" cols="50" rows="8"></textarea><br /><br />
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                    <input type="submit" value="Add" />
+                </form>
+            </div>
+        </div>
+        <div id="genericsidebar" class="col-sm-4 topmodule">
+            <div id="sidebar">
+                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <ins class="adsbygoogle" style="display: block" data-ad-client="ca-pub-0140213869397178" data-ad-slot="2289081698"
+                     data-ad-format="auto"></ins>
+                <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+            </div>
+        </div>
+    </div>
+
+</section>
+</body>
+</html>

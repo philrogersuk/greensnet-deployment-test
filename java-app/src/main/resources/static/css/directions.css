@@ -1,0 +1,11 @@
+#sidebar h3 {
+    border-top-style: none;
+}
+#module h3:first-of-type {
+    border-top-style: none;
+}
+#sidebar div {margin:0px 5px; padding:5px; border-top: 1px solid #ddd; text-align:center;}
+#sidebar ul li:first-child div {border-top: 0;}
+#sidebar UL, LI {margin:0; text-indent:0; padding: 0;}
+#sidebar LI {margin: 0px; list-style:none;}
+#sidebar A {display:block; cursor:pointer;}

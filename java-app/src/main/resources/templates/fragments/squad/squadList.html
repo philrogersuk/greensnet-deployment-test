@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="squadList" class="row">
+	<div class="col-sm-12">
+		<div class="main topmodule">
+			<span th:if="${page_title eq 'Squad'}">
+				<img src="images/2020.jpg" width="100%" alt="2020/21 season squad picture" />
+				<p>(Photo by Derek Beech)</p>
+			</span>
+			<p th:if="${page_title ne 'Squad'}">
+				Listed in this section is an archive list of all players we currently know to have played first team football for Hendon
+				FC, including trialists. Note that this archive is not complete as we have missing data in our records. If you believe
+				you have information that could help us complete this archive, please <a href="Contact">contact us</a>.
+			</p>
+			<div class="letterMenu">
+				<span th:each="letter : ${#strings.arraySplit('A B C D E F G H I J K L M N O P Q R S T U V W X Y Z', ' ')}"><a th:href="@{Squad(method=archive,letter=${letter})}" th:text="${letter}"></a> </span>
+			</div>
+
+			<table id="staffList" class="table">
+				<caption>Current Squad Listing</caption>
+				<tr>
+					<th scope="col">Name</th>
+					<th scope="col">Role</th>
+					<th scope="col">D.o.B</th>
+					<th scope="col">Time at club</th>
+					<th scope="col">&nbsp;</th>
+				</tr>
+				<tr th:each="item : ${staff_list}">
+					<td th:text="${item.firstName} + ' ' + ${item.lastName}"></td>
+					<td th:if="${page_title eq 'Squad'}" th:utext="${item.currentRolesAtClub}"></td>
+					<td th:if="${page_title ne 'Squad'}" th:utext="${item.allRolesAtClub}"></td>
+					<td th:text="${#temporals.format(item.dateOfBirth, 'dd/MM/yyyy')}"></td>
+					<td th:text="${item.datesAtClub}"></td>
+					<td><a th:href="@{Squad(method=view,id=${item.id})}">Profile</a></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>
+</body>
+</html>

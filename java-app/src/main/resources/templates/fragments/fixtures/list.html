@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="list">
+	<div th:each="month : ${fixtures}">
+		<h3 class="month" th:text="${month.month} + ' ' +${month.year}">July 2010</h3>
+		<div class="fixture" th:each="fixture : ${month.fixtures}">
+		<a th:href="@{${null ne fixture.kickOff && fixture.kickOff.isBefore(now) ? ('/Reports/' + fixture.id) : ('/Directions?id=' + fixture.actualVenueId)}}">
+			<div class="row">
+				<div class="col-2 align-self-center">
+					<div class="competition" th:text="${fixture.competition.shortCode}">League</div>
+					<div class="date" th:text="${(null ne fixture.kickOff) ? #temporals.format(fixture.kickOff, 'EE dd MMM') : 'TBA'}">Sat 1st Mar</div>
+				</div>
+				<div class="col-9 align-self-center">
+					<div class="row">
+						<div class="col-2 text-center align-self-center"><img th:src="@{${fixture.homeCrest}}" height="40px"></div>
+						<div class="col-3 text-center align-self-center" th:text="${fixture.homeTeamName}">Hendon</span></div>
+						<div th:if="${null ne fixture.kickOff && fixture.kickOff.isBefore(now)}" class="col-1 align-self-center"><div class="score text-center" th:text="${fixture.homeTeamScore}">0</div></div>
+						<div th:if="${null ne fixture.kickOff && fixture.kickOff.isBefore(now)}" class="col-1 align-self-center"><div class="score text-center" th:text="${fixture.awayTeamScore}">2</div></div>
+						<div th:if="${null ne fixture.kickOff && not fixture.kickOff.isBefore(now)}" class="col-2 text-center align-self-center" th:text="${#temporals.format(fixture.kickOff, 'hh:mma')}"></div>
+						<div th:if="${null eq fixture.kickOff}" class="col-2 text-center align-self-center">v</div>
+						<div class="col-3 text-center align-self-center" th:text="${fixture.awayTeamName}">Hendon</div>
+						<div class="col-2 text-center align-self-center"><img th:src="@{${fixture.awayCrest}}" height="40px"></div>
+					</div>
+				</div>
+				<div class="col-1 align-self-center">
+					<div class="details text-right">&#10097;</div>
+				</div>
+			</div>
+			<div class="row" th:if="${fixture.notPlayed}">
+				<div class="col-2"></div>
+				<div class="col-9 moreInfo">Fixture was never played</div>
+				<div class="col-2"></div>
+			</div>
+			<div class="row" th:if="${-1 ne fixture.abandonedMinute}">
+				<div class="col-2"></div>
+				<div class="col-9 moreInfo" th:text="${'Fixture abandoned after ' + fixture.abandonedMinute + ' minutes due to ' + fixture.abandonedReason + '.'}"></div>
+				<div class="col-2"></div>
+			</div>
+		</a>
+		</div>
+	</div>
+</div>
+</body>
+</html>

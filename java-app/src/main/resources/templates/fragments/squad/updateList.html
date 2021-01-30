@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="updateList" class="row">
+	<div class="col-sm-12">
+		<div class="main topmodule">
+			<p>
+				Listed below are all the individuals that we have published Where Are They Now interviews with, sorted by the date in which
+				they were first published. If you believe are in touch with a former staff member, or indeed are a former staff member and can
+				help us with an interview, please <a href="Contact">contact us</a>.
+			</p>
+<!--			<table id="staffList" class="table">
+				<tr>
+					<th scope="col">Name</th>
+					<th scope="col">D.o.B</th>
+					<th scope="col">Published</th>
+					<th scope="col">&nbsp;</th>
+				</tr>
+				<c:forEach var="item" items="${staff_update_list}">
+					<tr>
+						<td><c:out value="${item.staffMember.firstName}" /> <c:out value="${item.staffMember.lastName}" /></td>
+						<td><javatime:format pattern="dd/MM/yyyy" value="${item.staffMember.dateOfBirth}" /></td>
+						<td><javatime:format pattern="dd/MM/yyyy" value="${item.datePublished}" /></td>
+						<td><a href="Squad?method=wherearetheynow&amp;id=<c:out value="${item.staffMember.id}" />">Profile</a></td>
+					</tr>
+				</c:forEach>
+			</table>-->
+		</div>
+	</div>
+</div>
+</body>
+</html>

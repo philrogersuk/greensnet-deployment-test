@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layouts/mainLayout :: layout(~{::link}, ~{::section})}">
+<head>
+   <link rel="stylesheet" type="text/css" href="css/fixtures.css" />
+</head>
+<body>
+<section>
+   <div class="row">
+      <div class="col-sm-12">
+         <div class="main topmodule">
+            <div class="gn-item">
+
+               <p th:if="${param.method == 'archive'}">
+                  <a href="Fixtures?method=archive">Return to archive listing</a>
+               </p>
+
+               <th:block th:if="${null ne fixture_list && not fixture_list.isEmpty()}">
+                  <div th:replace="fragments/fixtures/list :: list" ></div>
+               </th:block>
+               <th:block th:if="${null ne season_list && 0 ne season_list.length}">
+                  <div th:replace="fragments/fixtures/seasonList :: list" ></div>
+               </th:block>
+            </div>
+         </div>
+      </div>
+   </div>
+</section>
+</body>
+</html>

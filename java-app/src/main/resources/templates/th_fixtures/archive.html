@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layouts/mainLayout :: layout(~{::link}, ~{::section})}">
+<head>
+    <link rel="stylesheet" type="text/css" th:href="@{'/css/fixtures.css'}" />
+</head>
+<body>
+<section>
+    <div class="row">
+        <div class="col-sm-12">
+            <table id="seasons" class="table">
+                <tr th:each="decade : ${seasonList}">
+                    <th scope="row" th:text="${decade[0]} + 's'">2010s</th>
+                    <td th:each="season : ${decade}" th:if="${not seasonStat.first}">
+                        <a th:if="${-1 != season}"
+                           th:href="@{${'/Fixtures/' + (decade[0]+(season%10))}}"
+                           th:text="${#numbers.formatInteger(season, 2) + '/' + #numbers.formatInteger((season+1)%100, 2)}">
+                            01/02
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</section>
+</body>
+</html>

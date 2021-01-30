@@ -1,0 +1,41 @@
+th, .month {
+    background:#f2f2f2;
+    font-size:120%;
+    font-weight:bold;
+}
+
+#staffList, #mainPlayer table, #playerSidebar table {
+    width:100%;
+}
+
+#playerSidebar img {
+    width:100%;
+}
+
+#sponsors th, #sponsors td{
+    text-align:left
+}
+.letterMenu {
+    margin-left:auto;
+    margin-right:auto;
+    width:546px;
+    margin-bottom: 7px;
+}
+.letterMenu span {
+    display:block;
+    text-align:center;
+    width:14px;
+    padding:2px;
+    float:left;
+    margin-left:1px;
+}
+
+.selected {
+    font-weight:bold;
+}
+caption {
+    display:none;
+}
+#playerSidebar h3:first-of-type {
+    border-top-style: none;
+}

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layouts/mainLayout :: layout(~{::link}, ~{::section})}">
+<head>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/seats.css}" />
+</head>
+<body>
+<section>
+	<div class="row">
+		<div id="genericmodule" class="col-sm-12 topmodule">
+			<div id="module">
+				<table th:if="${null ne seats and not (seats eq 0)}">
+						<tr th:each="row : ${seats}">
+							<td th:each="cell : ${row}">
+								<img th:if="${cell.type.type eq 'Green' and (null eq cell.sponsor or '' eq cell.sponsor)}" src="images/seats/green.png" style="opacity: 0.3;" width=30 data-toggle="tooltip" data-placement="bottom" title="This seat is available!"/>
+								<img th:if="${cell.type.type eq 'Green' and (null ne cell.sponsor and '' ne cell.sponsor)}" src="images/seats/green.png" width=30 data-toggle="tooltip" data-placement="bottom" th:title="${'Seat sponsored by: ' + cell.sponsor}"/>
+								<img th:if="${cell.type.type eq 'White' and (null eq cell.sponsor or '' eq cell.sponsor)}" src="images/seats/white.png" style="opacity: 0.3;" width=30 data-toggle="tooltip" data-placement="bottom" title="This seat is available!"/>
+								<img th:if="${cell.type.type eq 'White' and (null ne cell.sponsor and '' ne cell.sponsor)}" src="images/seats/white.png" width=30 data-toggle="tooltip" data-placement="bottom" th:title="${'Seat sponsored by: ' + cell.sponsor}"/>
+							</td>
+						</tr>
+				</table>
+				<p th:if="${page_content eq null or page_content eq ''}">This page has not yet been completed. We hope to finish it soon!</p>
+				<th:block th:if="${page_content ne null or page_content ne ''}" th:utext="${page_content}"></th:block>
+			</div>
+		</div>
+	</div>
+</section>
+</body>
+</html>

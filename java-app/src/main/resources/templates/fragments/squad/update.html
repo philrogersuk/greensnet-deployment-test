@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="update" id="mainPlayer">
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="main topmodule">
+				<p>
+					<a href="Squad?method=wherearetheynow">View more ""Where Are They Now?" interviews</a>
+				</p>
+<!--				<c:set var="temp" value="one
+two" />
+				<c:set var="newline" value="${fn:substring(temp,3,5)}" />
+				<h3>What is your occupation?</h3>
+				<c:set var="story" value="${fn:replace(staff_update.occupation,'&','&amp;')}" />
+				<c:set value="${fn:split(story, newline)}" var="splitItem" />
+				<c:forEach var="para" items="${splitItem}">
+					<p>
+						<c:out value="${para}" escapeXml="false" />
+					</p>
+				</c:forEach>
+
+				<h3>Where do you live?</h3>
+				<c:set var="story" value="${fn:replace(staff_update.homeLocation,'&','&amp;')}" />
+				<c:set value="${fn:split(story, newline)}" var="splitItem" />
+				<c:forEach var="para" items="${splitItem}">
+					<p>
+						<c:out value="${para}" escapeXml="false" />
+					</p>
+				</c:forEach>
+
+				<h3>Are you still involved in football?</h3>
+				<c:set var="story" value="${fn:replace(staff_update.stillInFootball,'&','&amp;')}" />
+				<c:set value="${fn:split(story, newline)}" var="splitItem" />
+				<c:forEach var="para" items="${splitItem}">
+					<p>
+						<c:out value="${para}" escapeXml="false" />
+					</p>
+				</c:forEach>
+
+				<h3>Which club did you join Hendon from?</h3>
+				<c:set var="story" value="${fn:replace(staff_update.whereJoinedFrom,'&','&amp;')}" />
+				<c:set value="${fn:split(story, newline)}" var="splitItem" />
+				<c:forEach var="para" items="${splitItem}">
+					<p>
+						<c:out value="${para}" escapeXml="false" />
+					</p>
+				</c:forEach>
+
+				<h3>Which other clubs did you play before you joined Hendon?</h3>
+				<c:set var="story" value="${fn:replace(staff_update.wherePlayedAfter,'&','&amp;')}" />
+				<c:set value="${fn:split(story, newline)}" var="splitItem" />
+				<c:forEach var="para" items="${splitItem}">
+					<p>
+						<c:out value="${para}" escapeXml="false" />
+					</p>
+				</c:forEach>
+
+				<h3>What is your favourite Hendon memory?</h3>
+				<c:set var="story" value="${fn:replace(staff_update.favouriteMemories,'&','&amp;')}" />
+				<c:set value="${fn:split(story, newline)}" var="splitItem" />
+				<c:forEach var="para" items="${splitItem}">
+					<p>
+						<c:out value="${para}" escapeXml="false" />
+					</p>
+				</c:forEach>
+
+				<h3>What was the best match you played in for Hendon?</h3>
+				<c:set var="story" value="${fn:replace(staff_update.bestMatch,'&','&amp;')}" />
+				<c:set value="${fn:split(story, newline)}" var="splitItem" />
+				<c:forEach var="para" items="${splitItem}">
+					<p>
+						<c:out value="${para}" escapeXml="false" />
+					</p>
+				</c:forEach>
+
+				<h3>What was the best goal you scored for Hendon?</h3>
+				<c:set var="story" value="${fn:replace(staff_update.bestGoal,'&','&amp;')}" />
+				<c:set value="${fn:split(story, newline)}" var="splitItem" />
+				<c:forEach var="para" items="${splitItem}">
+					<p>
+						<c:out value="${para}" escapeXml="false" />
+					</p>
+				</c:forEach>
+
+				<h3>Who was the best Hendon player you played with?</h3>
+				<c:set var="story" value="${fn:replace(staff_update.bestPlayer,'&','&amp;')}" />
+				<c:set value="${fn:split(story, newline)}" var="splitItem" />
+				<c:forEach var="para" items="${splitItem}">
+					<p>
+						<c:out value="${para}" escapeXml="false" />
+					</p>
+				</c:forEach>
+
+				<h3>Who was the best manager you played under?</h3>
+				<c:set var="story" value="${fn:replace(staff_update.bestManager,'&','&amp;')}" />
+				<c:set value="${fn:split(story, newline)}" var="splitItem" />
+				<c:forEach var="para" items="${splitItem}">
+					<p>
+						<c:out value="${para}" escapeXml="false" />
+					</p>
+				</c:forEach>
+
+				<h3>What was your favourite away ground while at Hendon?</h3>
+				<c:set var="story" value="${fn:replace(staff_update.favouriteGround,'&','&amp;')}" />
+				<c:set value="${fn:split(story, newline)}" var="splitItem" />
+				<c:forEach var="para" items="${splitItem}">
+					<p>
+						<c:out value="${para}" escapeXml="false" />
+					</p>
+				</c:forEach>
+
+				<h3>What was your least favourite away ground while at Hendon?</h3>
+				<c:set var="story" value="${fn:replace(staff_update.leastFavGround,'&','&amp;')}" />
+				<c:set value="${fn:split(story, newline)}" var="splitItem" />
+				<c:forEach var="para" items="${splitItem}">
+					<p>
+						<c:out value="${para}" escapeXml="false" />
+					</p>
+				</c:forEach>
+
+				<p></p>
+			</div>
+			<div id="playerSidebar">
+				<h2>Basic Info</h2>
+				<c:choose>
+					<c:when test="${staff_info.hasImage}">
+						<img src="images/staff/<c:out value="${staff_info.id}" />.jpg" alt="profile picture" />
+					</c:when>
+					<c:otherwise>
+						<img src="images/staff/noimage.png" alt="profile picture" />
+					</c:otherwise>
+				</c:choose>
+				<table>
+					<tr>
+						<th scope="row">DoB</th>
+						<td><c:choose>
+							<c:when test="${null != staff_info.dateOfBirth}">
+								<javatime:format pattern="dd/MM/yyyy" value="${staff_info.dateOfBirth}" />
+							</c:when>
+							<c:otherwise>Unknown</c:otherwise>
+						</c:choose></td>
+					</tr>
+				</table>-->
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>

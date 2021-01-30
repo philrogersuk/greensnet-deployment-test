@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<table th:fragment="list">
+    <tr>
+        <th scope="col">Date</th>
+        <th scope="col">Fixture</th>
+        <th scope="col">Competition</th>
+        <th scope="col">Score</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+    </tr>
+    <tr th:each="fixture : ${fixture_list}">
+        <td th:text="${fixture.kickOff}"></td>
+        <td th:text="${fixture.venue.venue} + ' v ' + ${fixture.opposition.name}"></td>
+        <td th:text="${fixture.competition.name}"></td>
+        <td th:text="${fixture.hendonScore} + ' - ' + ${fixture.oppositionScore}"></td>
+        <td><a th:href="@{AdminFixtures(method='edit',id=${fixture.id},season=${selected_season})}">Edit Details</a></td>
+        <td><a th:href="@{${'AdminHfctv/Fixture/' + fixture.id}}">Videos</a></td>
+        <td><a th:href="@{AdminFixtures(method='squads',id=${fixture.id},season=${selected_season})}">Edit Teams</a></td>
+        <td><a th:href="@{AdminFixtures(method='goals',id=${fixture.id},season=${selected_season})}">Edit Scorers</a></td>
+    </tr>
+</table>
+</body>
+</html>

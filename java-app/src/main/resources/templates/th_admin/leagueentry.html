@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layouts/adminLayout :: layout(~{::link}, ~{::section})}">
+<head>
+	<link rel="stylesheet" type="text/css" href="/css/admin/generic.css" />
+</head>
+<body>
+<section>
+	<div class="row">
+		<div class="col-sm-8">
+
+			<form action="AdminLeagueEntries?method=add" method="post">
+				<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+				<label for="season">Season:</label>
+				<select name="season" id="season">
+					<option th:each="item : ${season_list}" th:value="${item}" th:text="${item + '/' + (item + 1)}"></option>
+				</select><br /><br />
+				<label for="competition">Type:</label>
+				<select name="competition" id="competition">
+					<option th:each="item : ${league_list}" th:value="${item.id}" th:text="${item.name}"></option>
+				</select><br /><br />
+				<label for="club">Type:</label>
+				<select name="club" id="club">
+					<option th:each="item : ${club_list}" th:value="${item.id}" th:text="${item.name}"></option>
+				</select>
+				<input type="submit" value="Add" />
+			</form>
+
+		</div>
+		<div class="col-sm-4">
+			<script type="application/javascript" async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"/>
+			<%-- Responsive --%>
+			<ins class="adsbygoogle" style="display: block" data-ad-client="ca-pub-0140213869397178" data-ad-slot="2289081698"
+				 data-ad-format="auto"></ins>
+			<script type="application/javascript">(adsbygoogle = window.adsbygoogle || []).push({});</script>
+		</div>
+	</div>
+</section>
+</body>
+</html>

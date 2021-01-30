@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layouts/mainLayout :: layout(~{::link}, ~{::section})}">
+<head>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/youth.css}" />
+</head>
+<body>
+<section>
+	<div class="row">
+		<div id="genericmodule" class="col-sm-8 topmodule">
+			<div id="module">
+				<table id="archive" class="table">
+					<tbody>
+						<tr th:each="season : ${archive_map}">
+							<th:block th:if="${seasonStat.odd}">
+								<th scope="col" th:each="cell : ${season}">
+									<th:block th:if="${null ne cell && '' ne cell}" th:text="${cell + '/' + (cell + 1)}"></th:block>
+								</th>
+							</th:block>
+							<th:block th:if="${seasonStat.even}">
+								<td th:each="cell : ${season}">
+									<a th:each="team : ${cell}" th:href="@{YouthNews(team=${team.team.id},season=${team.season})}" th:text="${team.team.name}"></a>
+									<br />
+								</td>
+							</th:block>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div id="genericsidebar" class="col-sm-4 topmodule">
+			<div id="sidebar">
+				<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+				<ins class="adsbygoogle" style="display: block" data-ad-client="ca-pub-0140213869397178" data-ad-slot="2289081698"
+					 data-ad-format="auto"></ins>
+				<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+			</div>
+		</div>
+	</div>
+</section>
+</body>
+</html>

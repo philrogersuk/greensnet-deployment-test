@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layouts/mainLayout :: layout(~{::link}, ~{::section})}">
+<head>
+    <link rel="stylesheet" type="text/css" href="css/genericpage.css" />
+</head>
+<body>
+<section>
+    <div class="row">
+        <div class="col-sm-12">
+            <h2>Gone</h2>
+            <p>The page or document you requested no longer exists. Please return to <a th:href="@{/}">our homepage</a> to find the information you're looking for.</p>
+            <p>If you continue to have problems, please <a th:href="@{/Contact}">contact us</a>.</p>
+        </div>
+    </div>
+</section>
+</body>
+</html>

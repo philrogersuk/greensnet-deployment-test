@@ -1,0 +1,12 @@
+/.settings
+/build
+/lib
+/target
+.classpath
+.project
+.gradle
+.maven.old
+
+.springBeans
+/Users
+/logs

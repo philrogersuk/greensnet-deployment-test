@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<form th:fragment="edit" th:action="@{AdminFixtures(method=editSubmit,season=${selected_season},id=${fixture.id})}" method="post">
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+    <fieldset>
+        <legend>Add New Fixture</legend>
+        <input type="hidden" name="season" id="season" th:value="${selected_season}" >
+        <label for="competition">Competition:</label>
+        <select name="competition" id="competition">
+            <th:block th:each="competition: ${competition_list}">
+                <option th:value="${competition.id}" th:selected="${fixture.competition.id==competition.id}" th:text="${competition.name}">FA Cup</option>
+            </th:block>
+        </select><br /><br />
+        <label for="kickoff">Kick-Off Date/Time:</label>
+        <input type="text" name="kickoff" id="kickoff" th:value="${#temporals.format(fixture.kickOff, 'yyyy-MM-dd HH:mm:ss')}" /><br /><br />
+        <label for="opposition">Opposition:</label>
+        <select name="opposition" id="opposition">
+            <th:block th:each="club: ${club_list}">
+                <option th:value="${club.id}" th:selected="${fixture.opposition.id==club.id}" th:text="${club.name}">Harrow Borough</option>
+            </th:block>
+        </select><br /><br />
+        <label for="venue">Venue:</label>
+        <select name="venue" id="venue">
+            <th:block th:each="venue: ${venue_list}">
+                <option th:value="${venue.id}" th:selected="${fixture.venue.id==venue.id}" th:text="${venue.venue}">Home</option>
+            </th:block>
+        </select><br /><br />
+        <label for="altVenue">Actual Venue:</label> <select name="altVenue" id="altVenue">
+        <option value="-1">&nbsp;</option>
+        <th:block th:each="club: ${club_list}">
+            <option th:value="${club.id}" th:selected="${fixture.alternativeVenue.id==club.id}" th:text="${club.name}">Harrow Borough</option>
+        </th:block>
+    </select>(only if not at "Home" ground)<br /><br />
+        <label for="hendonScore">Hendon Score</label>
+        <input type="text" name="hendonScore" id="hendonScore" th:value="${fixture.hendonScore}" size="3" />
+        <label for="hendonScore90">at 90 mins (if extra time)</label>
+        <input type="text" name="hendonScore90" id="hendonScore90" th:value="${fixture.hendonScore90}" size="3" />
+        <label for="hendonPenalties">penalties</label>
+        <input type="text" name="hendonPenalties" id="hendonPenalties" th:value="${fixture.hendonPenalties}" size="3" /><br /><br />
+
+        <label for="oppositionScore">Opposition Score</label>
+        <input type="text" name="oppositionScore" id="oppositionScore" th:value="${fixture.oppositionScore}" size="3" />
+        <label for="oppositionScore90">at 90 mins (if extra time)</label>
+        <input type="text" name="oppositionScore90" id="oppositionScore90" th:value="${fixture.oppositionScore90}" size="3" />
+        <label for="oppositionPenalties">penalties</label>
+        <input type="text" name="oppositionPenalties" id="oppositionPenalties" th:value="${fixture.oppositionPenalties}" size="3" /><br /><br />
+
+        <label for="abandonedMinute">Abandoned Minute:</label>
+        <input type="text" name="abandonedMinute" id="abandonedMinute" th:value="${fixture.abandonedMinute}" size="3" /><br /><br />
+        <label for="abandonedReason">Abandoned Reason:</label>
+        <input type="text" name="abandonedReason" id="abandonedReason" th:value="${fixture.abandonedReason}" /><br /><br />
+        <label for="notPlayed">Match Never Played:</label>
+        <input type="checkbox" name="notPlayed" id="notPlayed" th:checked="${fixture.notPlayed}" /><br /><br />
+        <label for="attendance">Attendance:</label>
+        <input type="text" name="attendance" id="attendance" th:value="${fixture.attendance}" /><br /><br />
+        <label for="report">Report:</label>
+        <textarea name="report" id="report" cols="60" rows="15" th:text="${fixture.report}"></textarea><br /><br />
+        <label for="author">Author:</label>
+        <input type="text" name="author" id="author" th:value="${fixture.author}" /><br /><br />
+        <label for="match">Match Sponsor:</label>
+        <input type="text" name="match" id="match" th:value="${fixture.matchSponsor}" /><br /><br />
+        <label for="matchball">Matchball Sponsor:</label>
+        <input type="text" name="matchball" id="matchball" th:value="${fixture.matchballSponsor}" /><br /><br />
+        <label for="programme">Programme Sponsor:</label>
+        <input type="text" name="programme" id="programme" th:value="${fixture.programmeSponsor}" /><br /><br />
+        <label for="mascot">Mascot:</label>
+        <input type="text" name="mascot" id="mascot" th:value="${fixture.mascot}" /><br /><br />
+        <label for="hfctvSponsor">HFCTV Sponsor:</label>
+        <input type="text" name="hfctvSponsor" id="hfctvSponsor" th:value="${fixture.hfctvSponsor}" /><br /><br />
+        <label for="highlightsId">Highlights Id:</label>
+        <input type="text" name="highlightsId" id="highlightsId" th:value="${fixture.highlightsId}" /><br /><br />
+        <label for="youtubeId">Youtube Id:</label>
+        <input type="text" name="youtubeId" id="youtubeId" th:value="${fixture.youtubeId}" /><br /><br />
+        <label for="ticketURL">Tickets URL:</label>
+        <input type="text" name="ticketURL" id="ticketURL" th:value="${fixture.ticketURL}" /><br /><br />
+        <input type="submit" value="Edit" />
+    </fieldset>
+</form>
+</body>
+</html>

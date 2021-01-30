@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<span th:fragment="showMonths">
+   <th:block th:each="year : ${#numbers.sequence(first_year,current_year)}">
+      <strong th:text="${year}"></strong>
+      <th:block th:each="monthString : ${month_list}">
+         | <a th:href="@{${'/AdminNews/' + year + '/' + monthStringStat.index + 1}}"
+            th:text="${#strings.substring(monthString,0,3)}"></a>
+      </th:block><br />
+   </th:block>
+<!--c:forEach step="1" varStatus="status" begin="${requestScope.first_year}" end="${requestScope.current_year}">
+   <strong><c:out value="${status.index}" /></strong>
+   <c:choose>
+      <c:when test="${status.index == requestScope.first_year && status.index == requestScope.current_year}">
+         <c:forEach step="1" begin="${requestScope.first_month}" end="${requestScope.current_month}" varStatus="status2"> | 
+            <a href="AdminNews?method=list&amp;month=<c:out value="${status2.index}" />&amp;year=<c:out value="${status.index}" />"><c:out value="${requestScope.month_list[status2.index]}" /></a>
+         </c:forEach>
+      </c:when>
+      <c:when test="${status.index == requestScope.first_year}">
+         <c:forEach step="1" begin="${requestScope.first_month}" end="11" varStatus="status2"> | 
+            <a href="AdminNews?method=list&amp;month=<c:out value="${status2.index}" />&amp;year=<c:out value="${status.index}" />"><c:out value="${requestScope.month_list[status2.index]}" /></a>
+         </c:forEach>
+      </c:when>
+      <c:when test="${status.index == requestScope.current_year}">
+         <c:forEach step="1" begin="0" end="${requestScope.current_month}" varStatus="status2"> | 
+            <a href="AdminNews?method=list&amp;month=<c:out value="${status2.index}" />&amp;year=<c:out value="${status.index}" />"><c:out value="${requestScope.month_list[status2.index]}" /></a>
+         </c:forEach>
+      </c:when>
+      <c:otherwise>
+         <c:forEach step="1" begin="0" end="11" varStatus="status2"> |
+            <a href="AdminNews?method=list&amp;month=<c:out value="${status2.index}" />&amp;year=<c:out value="${status.index}" />"><c:out value="${requestScope.month_list[status2.index]}" /></a>
+         </c:forEach>
+      </c:otherwise>
+   </c:choose>
+   <br />
+</c:forEach-->
+</span>
+</body>
+</html>

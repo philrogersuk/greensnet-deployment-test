@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<table th:fragment="list" id="seasons" class="table">
+	<tr th:each="decade : ${season_list}">
+		<th scope="row" th:text="${decade[0]} + 's'">2010s</th>
+		<td th:each="season : ${decade}" th:if="${not seasonStat.first}">
+			<a th:if="${-1 != season}"
+			   th:href="@{Fixtures(method=archive,season=${decade[0]+(season%10)})}"
+			   th:text="${#numbers.formatInteger(season, 2) + '/' + #numbers.formatInteger(season+1, 2)}">
+				01/02
+			</a>
+
+		</td>
+	</tr>
+</table>
+</body>
+</html>

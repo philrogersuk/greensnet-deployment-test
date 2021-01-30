@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layouts/mainLayout :: layout(~{::link}, ~{::section})}">
+<head>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/mascots.css}" />
+</head>
+<body>
+<section>
+	<div class="row">
+		<div id="genericmodule" class="col-sm-8 topmodule">
+			<div id="module">
+				<p th:if="${mascots eq null or mascots.isEmpty()}">This page has not yet been completed. We hope to finish it soon!</p>
+
+				<span th:if="${mascots ne null and not mascots.isEmpty()}" th:utext="${page_content}"></span>
+
+				<table class="table" th:if="${mascots ne null and not mascots.isEmpty()}">
+					<caption>Mascots for current season</caption>
+					<tr>
+						<th scope="col">Date</th>
+						<th scope="col">Opposition</th>
+						<th scope="col">Mascot</th>
+					</tr>
+					<tr th:each="match : ${mascots}">
+						<td th:text="${#temporals.format(match.kickOff, 'dd/MM/yy')}"></td>
+						<td><th:block th:text="${match.opposition.name}"><c:out value="${match.opposition.name}" /></th:block>
+							<th:block th:if="${'LEAGUE' ne match.competition.type}" th:text="${'(' + match.competition.shortCode + ')'}"></th:block>
+						</td>
+						<td th:text="${match.mascot}"></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div id="genericsidebar" class="col-sm-4 topmodule">
+			<div id="sidebar">
+				<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+				<ins class="adsbygoogle" style="display: block" data-ad-client="ca-pub-0140213869397178" data-ad-slot="2289081698"
+					 data-ad-format="auto"></ins>
+				<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+			</div>
+		</div>
+	</div>
+</section>
+</body>
+</html>

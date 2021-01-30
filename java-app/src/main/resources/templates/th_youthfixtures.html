@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layouts/mainLayout :: layout(~{::link}, ~{::section})}">
+<head>
+   <link rel="stylesheet" type="text/css" th:href="@{/css/youth.css}" />
+</head>
+<body>
+<section>
+   <div class="row">
+      <div id="genericmodule" class="col-sm-8 topmodule">
+         <div id="module">
+            <div th:replace="fragments/youth/menu :: menu" ></div>
+            <table class="table" th:if="${null ne fixture_list and not fixture_list.isEmpty()}">
+               <caption>Fixture and results</caption>
+               <tr>
+                  <th scope="col">Date</th>
+                  <th scope="col"></th>
+                  <th scope="col">Opposition</th>
+                  <th scope="col">Competition</th>
+                  <th scope="col">Result</th>
+                  <th scope="col">Scorers</th>
+               </tr>
+               <th:block th:each="fixture : ${fixture_list}">
+                  <tr>
+                     <td class="date" th:text="${#temporals.format(fixture.kickOff, 'EE dd MMM')}"></td>
+                     <td class="venue" th:text="${fixture.venueAsString}"></td>
+                     <td th:text="${fixture.opposition}"></td>
+                     <td class="competition" th:text="${fixture.competition}"></td>
+                     <td class="result">
+                        <span th:if="${fixture.hendonScore eq -1}">-</span>
+                        <span th:if="${fixture.hendonScore ne -1}" th:text="${fixture.hendonScore + '-' + fixture.oppositionScore}"></span>
+                        <span th:if="${fixture.hendonScore90 ne -1 && fixture.oppositionScore90 ne -1}">*</span>
+                     </td>
+                     <td th:text="${fixture.hendonGoals}"></td>
+                  </tr>
+                  <tr th:if="${fixture.hendonScore90 ne -1 && fixture.oppositionScore90 ne -1}">
+                     <td class="penalties" colspan="8">
+                        <span th:text="${fixture.hendonScore90 + '-' + fixture.oppositionScore90 + ' after 90 minutes.'}"></span>
+                        <span th:if="${fixture.hendonPenalties ne -1 and fixture.oppositionPenalties ne -1 and fixture.hendonPenalties > fixture.oppositionPenalties}"
+                              th:text="${'Hendon won ' + fixture.hendonPenalties + '-' + fixture.oppositionPenalties + ' on penalties'}"></span>
+                        <span th:if="${fixture.hendonPenalties ne -1 and fixture.oppositionPenalties ne -1 and fixture.hendonPenalties < fixture.oppositionPenalties}"
+                              th:text="${fixture.opposition ' won ' + fixture.oppositionPenalties + '-' + fixture.hendonPenalties + ' on penalties'}"></span>
+                     </td>
+                  </tr>
+               </th:block>
+            </table>
+            <p th:if="${null eq fixture_list or fixture_list.isEmpty()}">No fixtures or results could be found for this team.</p>
+         </div>
+      </div>
+      <div id="genericsidebar" class="col-sm-4 topmodule">
+         <div id="sidebar">
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <ins class="adsbygoogle" style="display: block" data-ad-client="ca-pub-0140213869397178" data-ad-slot="2289081698"
+                 data-ad-format="auto"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+         </div>
+      </div>
+   </div>
+</section>
+</body>
+</html>
+

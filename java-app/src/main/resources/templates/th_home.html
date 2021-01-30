@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layouts/mainLayout :: layout(~{::head}, ~{::section})}">
+<head>
+    <link rel="stylesheet" type="text/css" href="css/home.css" />
+</head>
+<body>
+<section>
+    <div class="row">
+        <div class="col-sm-12">
+            <div id="carousel" class="carousel slide" data-ride="carousel" data-interval="10000">
+                <div class="carousel-inner">
+                    <div th:each="item : ${featuredItems}" th:class="${itemStat.count == 1 ? 'carousel-item active' : 'carousel-item'}">
+                        <a th:href="@{${item.targetUrl}}"><img th:src="@{${item.awsUrl}}" class="d-block w-100" th:alt="${item.altText}" /></a>
+                    </div>
+                </div>
+
+                <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+    </div>
+        <div class="row">
+
+            <div id="newsitems" class="col-sm-8 topmodule">
+                <h2>Latest News</h2>
+                <a th:each="item : ${news_items.subList(0, 5)}" th:href="@{${'/News/' + item.id + '/' + item.headlineAsEncodedString}}">
+                    <div class="row newsitem">
+                        <div class="col-sm-4">
+                            <img th:src="@{/images/news/defaultNews.png}" class="img-fluid" />
+                        </div>
+                        <div class="col-sm-8">
+                            <h3 th:text="${item.headline}"></h3>
+                            <div th:utext="${item.firstSentence + '.'}"></div>
+                            <!--div id="publishDate" th:text="${#temporals.format(item.timeOfRelease , 'EEE dd MMM yyyy, HH:mm')}">13:21, 20/01/2020</div-->
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+        <div class="col-sm-4 sidebar topmodule">
+            <div class="fixture">
+                <h2>Next Fixture</h2>
+                <div class="gn-item">
+                    <th:block th:if="${next_fixture ne null}">
+                        <div class="text-center date" th:text="${next_fixture.competition.name}"></div>
+
+                        <div class="row align-items-center">
+                            <div class="col-4 text-center align-self-start"><img th:src="@{${nextHomeCrest}}" height="100px"><br/>
+                                <span th:text="${next_fixture.homeTeamName}">Hendon</span></div>
+                            <div class="col-4 text-center">
+                                <div class="date" th:text="${#temporals.format(next_fixture.kickOff, 'EEE, dd MMM')}"></div>
+                                <div class="date" th:text="${#temporals.format(next_fixture.kickOff, 'h:mm a')}">0</div></div>
+                            <div class="col-4 text-center align-self-start"><img th:src="@{${nextAwayCrest}}" height="100px"><br/>
+                                <span th:text="${next_fixture.awayTeamName}">Hendon</span></div>
+                        </div>
+                        <div class="row align-items-center" th:if="${null ne next_fixture.ticketURL && '' ne next_fixture.ticketURL}">
+                            <div class="col-12 text-center"><span th:text="${'at ' + next_fixture.actualVenue.name + ' FC'}"></span></div>
+                        </div>
+                        <a th:href="@{Directions(id=${next_fixture.actualVenue.id})}">
+                            <div class="matchDetailsLink">DIRECTIONS</div>
+                        </a>
+                        <a th:href="@{${next_fixture.ticketURL}}" th:if="${null ne next_fixture.ticketURL && '' ne next_fixture.ticketURL}">
+                            <div class="matchDetailsLink">TICKETS</div>
+                        </a>
+                    </th:block>
+                    <th:block th:if="${next_fixture eq null}">
+                        <p class="align-items-center">Next fixture not yet known.</p>
+                        <p class="align-items-center">Details of our next games will appear here once arranged.</p>
+                    </th:block>
+                </div>
+            </div>
+            <div class="result">
+<!--                        <script src="http://live.footballwebpages.co.uk/hendon.js"
+                                type="text/javascript"></script>-->
+                <h2>Latest Result</h2>
+                <div class="gn-item">
+                    <div class="text-center date" th:text="${#temporals.format(last_fixture.kickOff, 'EEE, dd MMM')}"></div>
+
+                    <div class="row align-items-center">
+                        <div class="col-4 text-center align-self-start"><img th:src="@{${previousHomeCrest}}" height="100px"><br/>
+                            <span th:text="${last_fixture.homeTeamName}">Hendon</span></div>
+                        <div class="col-2 text-center"><div class="score" th:text="${last_fixture.homeTeamScore}">0</div></div>
+                        <div class="col-2 text-center"><div class="score" th:text="${last_fixture.awayTeamScore}">2</div></div>
+                        <div class="col-4 text-center align-self-start"><img th:src="@{${previousAwayCrest}}" height="100px"><br/>
+                            <span th:text="${last_fixture.awayTeamName}">Hendon</span></div>
+                    </div>
+                    <a th:href="@{Reports?(id=${last_fixture.id})}">
+                        <div class="matchDetailsLink">MATCH DETAILS</div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="highlights">
+                <h2>HFCTV</h2>
+                <div class="gn-item">
+                    <div class="videoWrapper" th:if="${null ne last_highlights}">
+                        <iframe th:src="@{${'https://www.youtube.com/embed/' + last_highlights.youtubeId}}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                    </div>
+                    <a th:href="@{HFCTV}">
+                        <div class="hfctvLink">MORE FROM HFCTV</div>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="sponsors text-center">
+                <h3>Our Sponsors</h3>
+                <a th:each="sponsor: ${sponsors}" th:href="@{${sponsor.websiteUrl}}"><img th:src="@{${sponsor.awsUrl}}" th:alt="${sponsor.altText}"/></a>
+                <p>Please support our sponsors where possible to thank them for their support of Hendon FC.</p>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="accredited text-center">
+                <h2>FA Accredited Club</h2>
+                <img src="images/charterStandard.png" alt="FA Charter Standard Accredited as an Adult Club"/>
+            </div>
+
+            <div>
+                <h2>EasyFundraising</h2>
+                    <p>Our EasyFundraising site makes it really easy to help raise money for the club
+                        while doing your normal every-day shopping. Just by visiting our site to click through
+                        to your normal online retailers we will earn a small commission while you don't pay a penny extra!</p>
+                <a href="http://www.easyfundraising.org.uk/hfcst">
+                    <div class="matchDetailsLink">MORE DETAILS</div>
+                </a>
+            </div>
+
+        </div>
+
+        <div class="col-sm-4">
+            <div class="snowball module">
+                <h2>Snowball Lottery</h2>
+                <div class="gn-item">
+                    <p>Our monthly lottery sees over £400 a month given away in
+                        prize money, along with an annual jackpot worth over £1000 each December.
+                        Join for just £5 a month!</p>
+
+                    <h3>Recent winners</h3>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Draw</th>
+                            <th scope="col">Winner</th>
+                            <th scope="col">Total Prizes</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="draw : ${snowball_draws.subList(0,7)}">
+                                <td th:text="${draw.name}"></td>
+                                <td th:text="${draw.firstPrizeWinner}"></td>
+                                <td th:text="${'£' + #numbers.formatDecimal(draw.firstPrize+draw.secondPrize, 2, 2)}"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <a href="Snowball">
+                        <div class="matchDetailsLink">MORE DETAILS</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="table module">
+                <h2>League Table</h2>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col">Pld</th>
+                        <th scope="col">GD</th>
+                        <th scope="col">Pts</th>
+                    </tr>
+                    </thead>
+                    <tbody th:if="${not league_tables.isEmpty()}">
+                    <th:block th:each="row:${league_tables[0].rows.subList(league_table_start, league_table_end)}">
+                        <tr th:class="${row.clubName == 'Hendon' ? 'table-success': ''}">
+                            <td th:text="${rowStat.count + league_table_start}"></td>
+                            <td><img th:src="${row.crestUrl}" height="40px" /></td>
+                            <td th:text="${row.club.shortestName}"></td>
+                            <td th:text="${row.played}"></td>
+                            <td th:text="${row.scored - row.conceeded}"></td>
+                            <td th:text="${row.points}"></td>
+                        </tr>
+                    </th:block>
+                    </tbody>
+                </table>
+
+                <a href="Tables">
+                    <div class="matchDetailsLink">FULL TABLE</div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+</section>
+</body>
+</html>

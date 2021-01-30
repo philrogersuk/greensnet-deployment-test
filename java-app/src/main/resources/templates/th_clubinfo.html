@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layouts/mainLayout :: layout(~{::link}, ~{::section})}">
+<head>
+	<link rel="stylesheet" type="text/css" href="css/clubinfo.css" />
+</head>
+<body>
+<section>
+	<th:block id="module" th:utext="${page_content}"></th:block>
+</section>
+</body>
+</html>

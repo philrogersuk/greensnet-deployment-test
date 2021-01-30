@@ -1,0 +1,24 @@
+#hfctvInfo,
+#videos>.row,
+#seasons,
+#tags{
+    margin-bottom: 30px;
+}
+
+#seasons>h3, #tags>h3, .col-sm-3>h3:first-of-type {
+    border-top: none;
+    padding-top: 0px;
+}
+a>.moreLink {
+    margin-top: 10px;
+    text-underline-mode: none;
+    font-weight: bold;
+    border-color: #006937;
+    border-width: 1px;
+    border-style: solid;
+    text-align: center;
+    padding: 5px 0px;
+}
+a>.moreLink:hover {
+    background-color: #eeeeee;
+}
