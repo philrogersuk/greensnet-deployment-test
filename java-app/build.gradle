@@ -44,7 +44,7 @@ dependencies {
 
 group = 'net.hendonfc'
 archivesBaseName = 'greensnet'
-version = "1.1.0"
+version = "1.1.1"
 description = 'Greensnet'
 sourceCompatibility = 11
 targetCompatibility = 11
