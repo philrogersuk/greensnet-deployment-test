@@ -40,7 +40,13 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: ./gradlew clean release jar publish -Prelease.useAutomaticVersion=true --info --stacktrace build sonarqube --info
+        run: ./gradlew clean release build sonarqube -Prelease.useAutomaticVersion=true --info --stacktrace --info
+      - name: Build with Gradle
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: ./gradlew publish --info
+
       - name: UploadCoverageToCodeCov
         uses: codecov/codecov-action@v1
         with:
