@@ -17,6 +17,9 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0  # Shallow clones disabled to assist SonarQube analysis
+
+      - run: git config --global user.email "git@hendonfc.net"
+      - run: git config --global user.name "Hendon FC Git"
       - name: Set up JDK 11
         uses: actions/setup-java@v1
         with:
