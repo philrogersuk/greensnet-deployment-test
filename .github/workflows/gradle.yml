@@ -38,8 +38,6 @@ jobs:
           restore-keys: ${{ runner.os }}-gradle
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
-      - name: Remove build folder
-        run: rm ./java-app/.build -rf
       - name: Build with Gradle
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
