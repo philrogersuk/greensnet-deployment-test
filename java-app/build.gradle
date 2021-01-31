@@ -102,6 +102,6 @@ jacocoTestReport {
 
 release {
     git {
-        requireBranch = 'versioning'
+        requireBranch = 'main'
     }
 }
