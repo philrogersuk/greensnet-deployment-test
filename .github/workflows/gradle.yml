@@ -69,4 +69,4 @@ jobs:
   #        port: ${{ secrets.WEB_PORT }}
   #        key: ${{ secrets.WEB_KEY }}
   #        source: "java-app//a.txt,tests/b.txt"
-  3        target: "test
+  #        target: "test
