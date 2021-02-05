@@ -61,9 +61,9 @@ repositories {
 publishing {
     publications {
         gpr(MavenPublication) {
-            groupId 'net.hendonfc'
+            groupId "$group"
             artifactId "$archivesBaseName"
-            version "$version"
+//            version "$version"
 
             from components.java
         }
