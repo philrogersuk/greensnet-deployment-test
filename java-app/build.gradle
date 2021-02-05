@@ -102,6 +102,6 @@ jacocoTestReport {
 
 release {
     git {
-        requireBranch = 'main'
+        requireBranch = 'upload-via-scp'
     }
 }
