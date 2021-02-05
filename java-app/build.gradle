@@ -44,7 +44,6 @@ dependencies {
 
 group = 'net.hendonfc'
 archivesBaseName = 'greensnet'
-version = "$version"
 
 description = 'Greensnet'
 sourceCompatibility = 11
@@ -65,7 +64,7 @@ publishing {
         gpr(MavenPublication) {
             groupId "$group"
             artifactId "$archivesBaseName"
-            version "$version"
+            version "$project.version"
 
             from components.java
         }
