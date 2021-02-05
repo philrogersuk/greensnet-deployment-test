@@ -5,7 +5,7 @@ name: Release new version
 
 on:
   push:
-    branches: [ main ]
+    branches: [ upload-via-scp ]
 
 jobs:
   build:
@@ -38,10 +38,10 @@ jobs:
           restore-keys: ${{ runner.os }}-gradle
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
-      - name: Build with Gradle
+      - name: Build with Gradle and Publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: ./gradlew clean release -Prelease.useAutomaticVersion=true --info
+        run: ./gradlew clean release publish -Prelease.useAutomaticVersion=true --info
       - name: Run sonarqube analysis
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -58,3 +58,15 @@ jobs:
         uses: codecov/codecov-action@v1
         with:
           token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
+
+
+
+  #    - name: copy file to server
+  #      uses: appleboy/scp-action@v0.1.1
+  #      with:
+  #        host: ${{ secrets.WEB_HOST }}
+  #        username: ${{ secrets.WEB_USERNAME }}
+  #        port: ${{ secrets.WEB_PORT }}
+  #        key: ${{ secrets.WEB_KEY }}
+  #        source: "java-app//a.txt,tests/b.txt"
+  3        target: "test
