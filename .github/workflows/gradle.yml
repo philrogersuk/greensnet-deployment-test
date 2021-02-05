@@ -41,7 +41,7 @@ jobs:
       - name: Build with Gradle and Publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: ./gradlew clean release :javaApp:publish -Prelease.useAutomaticVersion=true --info
+        run: ./gradlew clean release publish -Prelease.useAutomaticVersion=true --info
       - name: Run sonarqube analysis
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
