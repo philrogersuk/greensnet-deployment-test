@@ -40,7 +40,7 @@ jobs:
         run: chmod +x gradlew
       - name: Build with Gradle and Publish
         env:
-          GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_ACCESS_TOKEN }}
+          ACTION_PERSONAL_TOKEN: ${{ secrets.ACTION_PERSONAL_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: ./gradlew clean release publish -Prelease.useAutomaticVersion=true --info
       - name: Run sonarqube analysis

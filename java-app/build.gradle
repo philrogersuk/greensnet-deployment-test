@@ -75,7 +75,7 @@ publishing {
             url = "https://maven.pkg.github.com/philrogersuk/greensnet-deployment-test"
             credentials {
                 username = "philrogersuk"
-                password = System.getenv("GITHUB_ACCESS)TOKEN")
+                password = System.getenv("ACTION_PERSONAL_TOKEN")
             }
         }
     }
