@@ -66,7 +66,6 @@ publishing {
             artifactId "$archivesBaseName"
             version "$project.version"
 
-
             from components.java
         }
     }
@@ -75,13 +74,12 @@ publishing {
             name = "GitHubPackages"
             url = "https://maven.pkg.github.com/philrogersuk/greensnet-deployment-test"
             credentials {
-                username = "philrogersuk"
+                username = System.getenv("GITHUB_ACTOR")
                 password = System.getenv("GITHUB_TOKEN")
             }
         }
     }
 }
-
 
 bootJar {
     launchScript()
