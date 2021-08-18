@@ -16,7 +16,7 @@ apply plugin: 'jacoco'
 dependencies {
     runtimeOnly project(':npm-app')
 
-    implementation platform('software.amazon.awssdk:bom:2.15.40')
+    implementation platform('software.amazon.awssdk:bom:2.17.22')
 
     implementation "org.springframework.boot:spring-boot-starter-web:$springBootVersion"
     implementation "org.springframework.boot:spring-boot-starter-logging:$springBootVersion"
