@@ -2,7 +2,7 @@
 plugins {
     id 'java'
     id 'org.springframework.boot' version "$springBootVersion"
-    id 'com.google.cloud.tools.jib' version '2.7.0'
+    id 'com.google.cloud.tools.jib' version '3.2.1'
     id "io.freefair.lombok" version "5.3.0"
     id 'net.researchgate.release' version '2.8.1'
 }
