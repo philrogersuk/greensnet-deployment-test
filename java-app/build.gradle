@@ -27,7 +27,7 @@ dependencies {
 
     implementation 'software.amazon.awssdk:s3'
 
-    implementation "mysql:mysql-connector-java:8.0.22"
+    implementation "mysql:mysql-connector-java:8.0.32"
     implementation 'com.rosaloves:bitlyj:1.0'
     implementation 'org.twitter4j:twitter4j-core:4.0.7'
     implementation 'com.google.guava:guava:30.0-jre'
